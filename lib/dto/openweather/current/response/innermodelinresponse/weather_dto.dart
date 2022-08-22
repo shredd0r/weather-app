@@ -1,16 +1,16 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'weather_model.g.dart';
+part 'weather_dto.g.dart';
 
 @JsonSerializable()
-class WeatherModel {
+class WeatherDto {
 
   late int? id;
   late String? main;
   late String? description;
   late String? icon;
 
-  WeatherModel(
+  WeatherDto(
       {
         this.id,
         this.main,
@@ -18,6 +18,6 @@ class WeatherModel {
         this.icon
       });
 
-  factory WeatherModel.fromJson(Map<String, dynamic> json) => _$WeatherModelFromJson(json);
-  Map<String, dynamic> toJson() => _$WeatherModelToJson(this);
+  factory WeatherDto.fromJson(Map<String, dynamic> json) => _$WeatherDtoFromJson(json);
+  Map<String, dynamic> toJson() => _$WeatherDtoToJson(this);
 }

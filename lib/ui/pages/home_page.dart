@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/models/current_weather_model.dart';
 import 'package:weather_app/models/daily_weather_model.dart';
 import 'package:weather_app/models/hourly_weather_model.dart';
-import 'package:weather_app/models/openweather/current/request/current_weather_request_model.dart';
-import 'package:weather_app/models/openweather/current/response/current_weather_response_model.dart';
+import 'package:weather_app/dto/openweather/current/request/current_weather_request_dto.dart';
+import 'package:weather_app/dto/openweather/current/response/current_weather_response_dto.dart';
 import 'package:weather_app/restclient/openweather_rest_client.dart';
 
 import 'weather_information.dart';
@@ -19,7 +19,7 @@ class HomePage extends StatefulWidget{
 
 class _HomePageState extends State<HomePage> {
 
-  late CurrentWeatherOpenWeatherResponseModel response;
+  late CurrentWeatherOpenWeatherResponseDto response;
 
   @override
   void initState() {
@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
   void sendRequest(BuildContext context) {
     OpenWeatherExecutor()
         .getCurrentWeatherInfo(
-          CurrentWeatherOpenWeatherRequestModel(
+          CurrentWeatherOpenWeatherRequestDto(
             latitude: 48.5161,
             longitude: 32.2581,
             appId: "c654ce747dc9f2f105fe0eeb463136b9"))

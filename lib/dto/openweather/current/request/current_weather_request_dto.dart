@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'current_weather_request_model.g.dart';
+part 'current_weather_request_dto.g.dart';
 
 @JsonSerializable()
-class CurrentWeatherOpenWeatherRequestModel {
+class CurrentWeatherOpenWeatherRequestDto {
   @JsonKey(name: "lat")
   late double latitude;
   @JsonKey(name: "lon")
@@ -15,7 +15,7 @@ class CurrentWeatherOpenWeatherRequestModel {
 
   double get getLatitude {return latitude;}
 
-  CurrentWeatherOpenWeatherRequestModel({
+  CurrentWeatherOpenWeatherRequestDto({
     required this.latitude,
     required this.longitude,
     required this.appId,
@@ -23,6 +23,6 @@ class CurrentWeatherOpenWeatherRequestModel {
     this.lang
   });
 
-  factory CurrentWeatherOpenWeatherRequestModel.fromJson(Map<String, dynamic> json) => _$CurrentWeatherOpenWeatherRequestModelFromJson(json);
-  Map<String, dynamic> toJson() => _$CurrentWeatherOpenWeatherRequestModelToJson(this);
+  factory CurrentWeatherOpenWeatherRequestDto.fromJson(Map<String, dynamic> json) => _$CurrentWeatherOpenWeatherRequestDtoFromJson(json);
+  Map<String, dynamic> toJson() => _$CurrentWeatherOpenWeatherRequestDtoToJson(this);
 }

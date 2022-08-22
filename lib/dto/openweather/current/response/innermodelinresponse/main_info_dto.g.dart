@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'main_info_model.dart';
+part of 'main_info_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-MainInfoModel _$MainInfoModelFromJson(Map<String, dynamic> json) =>
-    MainInfoModel(
+MainInfoDto _$MainInfoDtoFromJson(Map<String, dynamic> json) =>
+    MainInfoDto(
       temperature: (json['temp'] as num?)?.toDouble(),
       feelsLike: (json['feels_like'] as num?)?.toDouble(),
       minTemperature: (json['temp_min'] as num?)?.toDouble(),
@@ -16,7 +16,7 @@ MainInfoModel _$MainInfoModelFromJson(Map<String, dynamic> json) =>
       humidity: json['humidity'] as int?,
     );
 
-Map<String, dynamic> _$MainInfoModelToJson(MainInfoModel instance) =>
+Map<String, dynamic> _$MainInfoDtoToJson(MainInfoDto instance) =>
     <String, dynamic>{
       'temp': instance.temperature,
       'feels_like': instance.feelsLike,

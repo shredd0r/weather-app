@@ -1,19 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'wind_info_model.dart';
+part of 'wind_info_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-WindInfoModel _$WindInfoModelFromJson(Map<String, dynamic> json) =>
-    WindInfoModel(
+WindInfoDto _$WindInfoDtoFromJson(Map<String, dynamic> json) =>
+    WindInfoDto(
       speed: (json['speed'] as num?)?.toDouble(),
       degrees: (json['deg'] as num?)?.toDouble(),
       gust: (json['gust'] as num?)?.toDouble(),
     );
 
-Map<String, dynamic> _$WindInfoModelToJson(WindInfoModel instance) =>
+Map<String, dynamic> _$WindInfoDtoToJson(WindInfoDto instance) =>
     <String, dynamic>{
       'speed': instance.speed,
       'deg': instance.degrees,

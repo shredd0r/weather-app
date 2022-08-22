@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'main_info_model.g.dart';
+part 'main_info_dto.g.dart';
 
 @JsonSerializable()
-class MainInfoModel {
+class MainInfoDto {
 
   @JsonKey(name: "temp")
   late double? temperature;
@@ -16,7 +16,7 @@ class MainInfoModel {
   late double? pressure;
   late int? humidity;
 
-  MainInfoModel(
+  MainInfoDto(
       {
         this.temperature,
         this.feelsLike,
@@ -26,6 +26,6 @@ class MainInfoModel {
         this.humidity
       });
 
-  factory MainInfoModel.fromJson(Map<String, dynamic> json) => _$MainInfoModelFromJson(json);
-  Map<String, dynamic> toJson() => _$MainInfoModelToJson(this);
+  factory MainInfoDto.fromJson(Map<String, dynamic> json) => _$MainInfoDtoFromJson(json);
+  Map<String, dynamic> toJson() => _$MainInfoDtoToJson(this);
 }

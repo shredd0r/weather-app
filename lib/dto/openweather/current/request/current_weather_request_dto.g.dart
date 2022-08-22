@@ -1,15 +1,15 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'current_weather_request_model.dart';
+part of 'current_weather_request_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-CurrentWeatherOpenWeatherRequestModel
-    _$CurrentWeatherOpenWeatherRequestModelFromJson(
+CurrentWeatherOpenWeatherRequestDto
+    _$CurrentWeatherOpenWeatherRequestDtoFromJson(
             Map<String, dynamic> json) =>
-        CurrentWeatherOpenWeatherRequestModel(
+        CurrentWeatherOpenWeatherRequestDto(
           latitude: (json['lat'] as num).toDouble(),
           longitude: (json['lon'] as num).toDouble(),
           appId: json['appid'] as String,
@@ -17,8 +17,8 @@ CurrentWeatherOpenWeatherRequestModel
           lang: json['lang'] as String?,
         );
 
-Map<String, dynamic> _$CurrentWeatherOpenWeatherRequestModelToJson(
-        CurrentWeatherOpenWeatherRequestModel instance) =>
+Map<String, dynamic> _$CurrentWeatherOpenWeatherRequestDtoToJson(
+        CurrentWeatherOpenWeatherRequestDto instance) =>
     <String, dynamic>{
       'lat': instance.latitude.toString(),
       'lon': instance.longitude.toString(),

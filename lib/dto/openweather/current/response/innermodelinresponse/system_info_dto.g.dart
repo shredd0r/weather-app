@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'system_info_model.dart';
+part of 'system_info_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-SystemInfoModel _$SystemInfoModelFromJson(Map<String, dynamic> json) =>
-    SystemInfoModel(
+SystemInfoDto _$SystemInfoDtoFromJson(Map<String, dynamic> json) =>
+    SystemInfoDto(
       type: json['type'] as int?,
       id: json['id'] as int?,
       message: (json['message'] as num?)?.toDouble(),
@@ -16,7 +16,7 @@ SystemInfoModel _$SystemInfoModelFromJson(Map<String, dynamic> json) =>
       sunset: json['sunset'] as int?,
     );
 
-Map<String, dynamic> _$SystemInfoModelToJson(SystemInfoModel instance) =>
+Map<String, dynamic> _$SystemInfoDtoToJson(SystemInfoDto instance) =>
     <String, dynamic>{
       'type': instance.type,
       'id': instance.id,

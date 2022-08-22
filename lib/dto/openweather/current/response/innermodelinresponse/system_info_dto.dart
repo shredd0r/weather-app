@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'system_info_model.g.dart';
+part 'system_info_dto.g.dart';
 
 @JsonSerializable()
-class SystemInfoModel {
+class SystemInfoDto {
   late int? type;
   late int? id;
   late double? message;
@@ -11,7 +11,7 @@ class SystemInfoModel {
   late int? sunrise;
   late int? sunset;
 
-  SystemInfoModel(
+  SystemInfoDto(
       {
         this.type,
         this.id,
@@ -21,6 +21,6 @@ class SystemInfoModel {
         this.sunset
       });
 
-  factory SystemInfoModel.fromJson(Map<String, dynamic> json) => _$SystemInfoModelFromJson(json);
-  Map<String, dynamic> toJson() => _$SystemInfoModelToJson(this);
+  factory SystemInfoDto.fromJson(Map<String, dynamic> json) => _$SystemInfoDtoFromJson(json);
+  Map<String, dynamic> toJson() => _$SystemInfoDtoToJson(this);
 }

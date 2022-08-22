@@ -1,22 +1,22 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'wind_info_model.g.dart';
+part 'wind_info_dto.g.dart';
 
 @JsonSerializable()
-class WindInfoModel {
+class WindInfoDto {
 
   late double? speed;
   @JsonKey(name: "deg")
   late double? degrees;
   late double? gust;
 
-  WindInfoModel(
+  WindInfoDto(
       {
         this.speed,
         this.degrees,
         this.gust
       });
 
-  factory WindInfoModel.fromJson(Map<String, dynamic> json) => _$WindInfoModelFromJson(json);
-  Map<String, dynamic> toJson() => _$WindInfoModelToJson(this);
+  factory WindInfoDto.fromJson(Map<String, dynamic> json) => _$WindInfoDtoFromJson(json);
+  Map<String, dynamic> toJson() => _$WindInfoDtoToJson(this);
 }

@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter_logs/flutter_logs.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:weather_app/models/openweather/current/request/current_weather_request_model.dart';
-import 'package:weather_app/models/openweather/current/response/current_weather_response_model.dart';
+import 'package:weather_app/dto/openweather/current/request/current_weather_request_dto.dart';
+import 'package:weather_app/dto/openweather/current/response/current_weather_response_dto.dart';
 
 class OpenWeatherExecutor {
 
@@ -13,7 +13,7 @@ class OpenWeatherExecutor {
 
   OpenWeatherExecutor();
 
-  Future<CurrentWeatherOpenWeatherResponseModel> getCurrentWeatherInfo(CurrentWeatherOpenWeatherRequestModel requestModel) async{
+  Future<CurrentWeatherOpenWeatherResponseDto> getCurrentWeatherInfo(CurrentWeatherOpenWeatherRequestDto requestModel) async{
     FlutterLogs.logInfo("tag", "subTag", "start execute");
     var uri = Uri.parse(_path);
     uri = Uri(
@@ -31,7 +31,7 @@ class OpenWeatherExecutor {
     if (response.statusCode == 200) {
       FlutterLogs.logInfo("weather-app", "openweather-executor", "status code: ${response.statusCode.toString()}");
       FlutterLogs.logInfo("weather-app", "openweather-executor", "body: ${response.body}");
-      return CurrentWeatherOpenWeatherResponseModel.fromJson(jsonDecode(response.body));
+      return CurrentWeatherOpenWeatherResponseDto.fromJson(jsonDecode(response.body));
     }
 
     throw "Http error: ${response.statusCode}, body: ${response.body}";
