@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:weather_app/dto/openweather/current/response/innermodelinresponse/wind_info_dto.dart';
+import '/src/dto/openweather/current/response/innermodelinresponse/wind_info_dto.dart';
 
 import 'innermodelinresponse/cloud_info_dto.dart';
 import 'innermodelinresponse/coordination_dto.dart';

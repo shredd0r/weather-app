@@ -1,0 +1,16 @@
+{
+  "application_settings" : {
+    "language" : 0,
+    "theme" : 0
+  },
+
+  "favorite_weather" : {
+    "id" : 0
+  },
+
+  "api_keys" : {
+    "openweather_key" : "c654ce747dc9f2f105fe0eeb463136b9",
+    "accuweather_key" : "",
+    "weatherapi_key" : ""
+  }
+}

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/ui/widgets/current_weather_widget.dart';
+import 'package:weather_app/src/ui/widgets/current_weather_widget.dart';
 
-import '../../models/current_weather_model.dart';
-import '../../models/daily_weather_model.dart';
-import '../../models/hourly_weather_model.dart';
-import '../widgets/daily_weather_widget.dart';
-import '../widgets/hourly_weather_widget.dart';
+import 'package:weather_app/src/models/current_weather_model.dart';
+import 'package:weather_app/src/models/daily_weather_model.dart';
+import 'package:weather_app/src/models/hourly_weather_model.dart';
+import 'package:weather_app/src/ui/widgets/daily_weather_widget.dart';
+import 'package:weather_app/src/ui/widgets/hourly_weather_widget.dart';
 
 class WeatherInfoWidget extends StatelessWidget {
   const WeatherInfoWidget(

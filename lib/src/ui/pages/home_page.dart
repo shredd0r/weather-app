@@ -1,12 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:weather_app/models/current_weather_model.dart';
-import 'package:weather_app/models/daily_weather_model.dart';
-import 'package:weather_app/models/hourly_weather_model.dart';
-import 'package:weather_app/dto/openweather/current/request/current_weather_request_dto.dart';
-import 'package:weather_app/dto/openweather/current/response/current_weather_response_dto.dart';
-import 'package:weather_app/restclient/openweather_rest_client.dart';
+import 'package:weather_app/src/models/current_weather_model.dart';
+import 'package:weather_app/src/models/daily_weather_model.dart';
+import 'package:weather_app/src/models/hourly_weather_model.dart';
+import 'package:weather_app/src/dto/openweather/current/request/current_weather_request_dto.dart';
+import 'package:weather_app/src/dto/openweather/current/response/current_weather_response_dto.dart';
+import 'package:weather_app/src/restclient/openweather_rest_client.dart';
 
 import 'weather_information.dart';
 
@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage> {
             elevation: 0.0
         ),
         body: Visibility(
-          visible: false,
+          visible: true,
           replacement: const Center(
               child: CircularProgressIndicator()
           ),

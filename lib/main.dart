@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_logs/flutter_logs.dart';
 
-import 'ui/pages/home_page.dart';
+import 'src/ui/pages/home_page.dart';
 
 void main() {
   runApp(const MyApp());
   setupLogging();
 
 }
+
+
 
 void setupLogging() async {
   await FlutterLogs.initLogs(
