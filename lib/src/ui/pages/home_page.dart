@@ -1,11 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:weather_app/src/dto/openweather/current/request/current_weather_request_dto.dart';
 import 'package:weather_app/src/models/current_weather_model.dart';
 import 'package:weather_app/src/models/daily_weather_model.dart';
 import 'package:weather_app/src/models/hourly_weather_model.dart';
-import 'package:weather_app/src/dto/openweather/current/request/current_weather_request_dto.dart';
-import 'package:weather_app/src/dto/openweather/current/response/current_weather_response_dto.dart';
 import 'package:weather_app/src/restclient/openweather_rest_client.dart';
 
 import 'weather_information.dart';
@@ -19,67 +16,42 @@ class HomePage extends StatefulWidget{
 
 class _HomePageState extends State<HomePage> {
 
-  late CurrentWeatherOpenWeatherResponseDto response;
+  late WeatherInfoWidget accuWeatherInfoWidget = WeatherInfoWidget(false, "AccuWeather", CurrentWeatherModel.emptyModel(), List<HourlyWeatherModel>.empty(), List<DailyWeatherInfoModel>.empty());
+  late WeatherInfoWidget openWeatherInfoWidget = WeatherInfoWidget(false, "OpenWeather", CurrentWeatherModel.emptyModel(), List<HourlyWeatherModel>.empty(), List<DailyWeatherInfoModel>.empty());
+  late WeatherInfoWidget theWeatherWeatherInfoWidget = WeatherInfoWidget(false, "TheWeather", CurrentWeatherModel.emptyModel(), List<HourlyWeatherModel>.empty(), List<DailyWeatherInfoModel>.empty());
 
   @override
   void initState() {
     super.initState();
   }
 
-  void sendRequest(BuildContext context) {
-    OpenWeatherExecutor()
-        .getCurrentWeatherInfo(
-          CurrentWeatherOpenWeatherRequestDto(
-            latitude: 48.5161,
-            longitude: 32.2581,
-            appId: "c654ce747dc9f2f105fe0eeb463136b9"))
+  void sendRequest(BuildContext context) async {
+    setState(
+            ()=> OpenWeatherExecutor()
+                .getCurrentWeatherInfo(
+                CurrentWeatherOpenWeatherRequestDto(
+                    latitude: 48.5161,
+                    longitude: 32.2581,
+                    appId: "c654ce747dc9f2f105fe0eeb463136b9"))
+                .then((value) => openWeatherInfoWidget.currentWeatherModel =
+                CurrentWeatherModel(         //TODO fix that shit
+                    value.cityName,
+                     "null",
+                     "null",
+                    DateTime.now().month.toString(),
+                    DateTime.now().day,
+                    value.mainInfoModel!.temperature!.sign,
+                    value.mainInfoModel!.minTemperature!.sign,
+                    value.mainInfoModel!.maxTemperature!.sign,
+                    value.mainInfoModel!.feelsLike!.sign,
+                    DateTime.now()))
+                .then((value) => openWeatherInfoWidget.isVisible = true)
+    );
 
-        .then(
-            (value) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value.cityName))));
   }
 
   @override
   Widget build(BuildContext context) {
-
-    var currentWeather = CurrentWeatherModel(
-        "Kharkiv",
-        "Thursday",
-        "Sunless",
-        "Jule",
-        18,
-        16.5,
-        14,
-        25,
-        17,
-        DateTime.now());
-
-    var dailyInfo = DailyWeatherModel(
-        24.3,
-        "some description for daily weather",
-        20,
-        5,
-        DateTime.now(),
-        DateTime.now(),
-        0.4,
-        10);
-
-    List<HourlyWeatherModel> listHourlyWeatherModel = [
-      HourlyWeatherModel(25.3, DateTime(2022, 1, 1, 10, 00), 10),
-      HourlyWeatherModel(22.3, DateTime(2022, 1, 1, 11, 00), 0),
-      HourlyWeatherModel(26.3, DateTime(2022, 1, 1, 12, 00), 25),
-      HourlyWeatherModel(21.3, DateTime(2022, 1, 1, 13, 00), 30),
-      HourlyWeatherModel(28.3, DateTime(2022, 1, 1, 14, 00), 45),
-    ];
-
-    List<DailyWeatherInfoModel> listDailyWeatherInfoModel = [
-      DailyWeatherInfoModel(dailyInfo, dailyInfo),
-      DailyWeatherInfoModel(dailyInfo, dailyInfo),
-      DailyWeatherInfoModel(dailyInfo, dailyInfo),
-      DailyWeatherInfoModel(dailyInfo, dailyInfo),
-      DailyWeatherInfoModel(dailyInfo, dailyInfo),
-      DailyWeatherInfoModel(dailyInfo, dailyInfo),
-      DailyWeatherInfoModel(dailyInfo, dailyInfo),
-    ];
 
     return Scaffold(
         backgroundColor: Colors.grey,
@@ -94,19 +66,14 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: Colors.transparent,
             elevation: 0.0
         ),
-        body: Visibility(
-          visible: true,
-          replacement: const Center(
-              child: CircularProgressIndicator()
-          ),
-          child: PageView(
+        body:
+          PageView(
             children: [
-              WeatherInfoWidget("AccuWeather", currentWeather, listHourlyWeatherModel, listDailyWeatherInfoModel),
-              WeatherInfoWidget("OpenWeather", currentWeather, listHourlyWeatherModel, listDailyWeatherInfoModel),
-              WeatherInfoWidget("TheWeather", currentWeather, listHourlyWeatherModel, listDailyWeatherInfoModel)
+              openWeatherInfoWidget,
+              accuWeatherInfoWidget,
+              theWeatherWeatherInfoWidget,
             ],
           ),
-        )
     );
   }
 

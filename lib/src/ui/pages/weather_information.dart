@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/src/dto/openweather/current/response/current_weather_response_dto.dart';
 import 'package:weather_app/src/ui/widgets/current_weather_widget.dart';
 
 import 'package:weather_app/src/models/current_weather_model.dart';
@@ -8,38 +9,49 @@ import 'package:weather_app/src/ui/widgets/daily_weather_widget.dart';
 import 'package:weather_app/src/ui/widgets/hourly_weather_widget.dart';
 
 class WeatherInfoWidget extends StatelessWidget {
-  const WeatherInfoWidget(
+  WeatherInfoWidget(
+      this._isVisible,
       this._providerName,
       this._currentWeatherModel,
       this._listHourlyWeatherModel,
       this._listDailyWeatherInfoModel,
       {Key? key}) : super(key: key);
-  final String _providerName;
-  final CurrentWeatherModel _currentWeatherModel;
-  final List<HourlyWeatherModel> _listHourlyWeatherModel;
-  final List<DailyWeatherInfoModel> _listDailyWeatherInfoModel;
+  late bool _isVisible;
+  late String _providerName;
+  late CurrentWeatherModel _currentWeatherModel;
+  late List<HourlyWeatherModel> _listHourlyWeatherModel;
+  late List<DailyWeatherInfoModel> _listDailyWeatherInfoModel;
+
+  set isVisible(bool isVisible) => _isVisible = isVisible;
+  set currentWeatherModel(CurrentWeatherModel currentWeatherModel) => _currentWeatherModel = currentWeatherModel;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: Column(
-        children: [
-          Center(
-              child: Text(
-                  _providerName,
-                  style: const TextStyle(fontSize: 30))
-          ),
-          const SizedBox(height: 25),
-          CurrentWeatherWidget(_currentWeatherModel),
-          const SizedBox(height: 15),
-          HourlyWeatherWidget(_listHourlyWeatherModel),
-          const SizedBox(height: 15),
-          DailyWeatherWidget(_listDailyWeatherInfoModel)
-          // const
-        ]
-      ),
+        backgroundColor: Colors.transparent,
+        body: Column(
+            children: [
+                Center(
+                    child: Text(
+                        _providerName,
+                        style: const TextStyle(fontSize: 30))
+                ),
+                Visibility(
+                    visible: _isVisible,
+                    replacement: const Center(child: CircularProgressIndicator()),
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 25),
+                        CurrentWeatherWidget(_currentWeatherModel),
+                        const SizedBox(height: 15),
+                        HourlyWeatherWidget(_listHourlyWeatherModel),
+                        const SizedBox(height: 15),
+                        DailyWeatherWidget(_listDailyWeatherInfoModel)
+                      ],
+                    )
+                )
+            ]  // const
+        ),
     );
   }
-
 }

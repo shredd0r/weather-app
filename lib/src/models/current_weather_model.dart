@@ -12,16 +12,16 @@ class CurrentWeatherModel {
       this.fillLikeTemperature,
       this.lastUpdate);
 
-  String cityName;
-  String dayOfWeek;
-  String visibility;
-  String month;
-  int day;
-  double currentTemperature;
-  double minTemperature;
-  double maxTemperature;
-  double fillLikeTemperature;
-  DateTime lastUpdate;
+  late String cityName;
+  late String dayOfWeek;
+  late String visibility;
+  late String month;
+  late int day;
+  late double currentTemperature;
+  late double minTemperature;
+  late double maxTemperature;
+  late double fillLikeTemperature;
+  late DateTime lastUpdate;
 
-
+  CurrentWeatherModel.emptyModel();
 }
