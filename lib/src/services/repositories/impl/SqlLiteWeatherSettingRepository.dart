@@ -1,6 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:weather_app/src/entity/weather_settings.dart';
-import 'package:weather_app/src/services/repository/base/base_weather_setting_repository.dart';
+import 'package:weather_app/src/services/repositories/base/base_weather_setting_repository.dart';
 
 class SqlLiteWeatherSettingRepository implements BaseWeatherSettingsRepository {
 

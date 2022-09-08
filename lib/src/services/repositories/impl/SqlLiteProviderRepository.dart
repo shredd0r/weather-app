@@ -1,5 +1,5 @@
 import 'package:weather_app/src/entity/provider_info.dart';
-import 'package:weather_app/src/services/repository/base/base_provider_repository.dart';
+import 'package:weather_app/src/services/repositories/base/base_provider_repository.dart';
 
 class SqlLiteProviderRepository implements BaseProviderRepository {
 
