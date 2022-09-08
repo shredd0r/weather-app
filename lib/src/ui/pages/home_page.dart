@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/src/dto/openweather/current/request/current_weather_request_dto.dart';
+import 'package:weather_app/src/dto/openweather/current/request/impl/current_weather_request_dto.dart';
 import 'package:weather_app/src/models/current_weather_model.dart';
 import 'package:weather_app/src/models/daily_weather_model.dart';
 import 'package:weather_app/src/models/hourly_weather_model.dart';
 import 'package:weather_app/src/restclient/openweather_rest_client.dart';
 
+import '../../services/mappers/mapper_provider_executer.dart';
 import 'weather_information.dart';
 
 class HomePage extends StatefulWidget{
@@ -15,6 +16,8 @@ class HomePage extends StatefulWidget{
 }
 
 class _HomePageState extends State<HomePage> {
+
+  final OpenWeatherExecutor openWeatherExecutor = OpenWeatherExecutor();
 
   late WeatherInfoWidget accuWeatherInfoWidget = WeatherInfoWidget(false, "AccuWeather", CurrentWeatherModel.emptyModel(), List<HourlyWeatherModel>.empty(), List<DailyWeatherInfoModel>.empty());
   late WeatherInfoWidget openWeatherInfoWidget = WeatherInfoWidget(false, "OpenWeather", CurrentWeatherModel.emptyModel(), List<HourlyWeatherModel>.empty(), List<DailyWeatherInfoModel>.empty());
@@ -27,27 +30,16 @@ class _HomePageState extends State<HomePage> {
 
   void sendRequest(BuildContext context) async {
     setState(
-            ()=> OpenWeatherExecutor()
-                .getCurrentWeatherInfo(
-                CurrentWeatherOpenWeatherRequestDto(
-                    latitude: 48.5161,
-                    longitude: 32.2581,
-                    appId: "c654ce747dc9f2f105fe0eeb463136b9"))
-                .then((value) => openWeatherInfoWidget.currentWeatherModel =
-                CurrentWeatherModel(         //TODO fix that shit
-                    value.cityName,
-                     "null",
-                     "null",
-                    DateTime.now().month.toString(),
-                    DateTime.now().day,
-                    value.mainInfoModel!.temperature!.sign,
-                    value.mainInfoModel!.minTemperature!.sign,
-                    value.mainInfoModel!.maxTemperature!.sign,
-                    value.mainInfoModel!.feelsLike!.sign,
-                    DateTime.now()))
-                .then((value) => openWeatherInfoWidget.isVisible = true)
-    );
-
+      ()=> {
+        openWeatherExecutor.getCurrentWeatherInfo(
+          CurrentWeatherOpenWeatherRequestDto( // TODO bruuh
+            latitude: 48.5161,
+            longitude: 32.2581,
+            appId: "c654ce747dc9f2f105fe0eeb463136b9"))
+          .then((value) => openWeatherInfoWidget.currentWeatherModel = Mapper.mapCurrentWeatherModel(value))
+          .then((value) => openWeatherInfoWidget.isVisible = true)
+        // openWeatherExecutor.
+      });
   }
 
   @override

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter_logs/flutter_logs.dart';
 import 'package:http/http.dart';
 
-import 'package:weather_app/src/dto/openweather/current/request/current_weather_request_dto.dart';
+import 'package:weather_app/src/dto/openweather/current/request/impl/current_weather_request_dto.dart';
 import 'package:weather_app/src/dto/openweather/current/response/current_weather_response_dto.dart';
 
 class OpenWeatherExecutor {
@@ -36,4 +36,6 @@ class OpenWeatherExecutor {
 
     throw "Http error: ${response.statusCode}, body: ${response.body}";
   }
+
+  // Future<>
 }
