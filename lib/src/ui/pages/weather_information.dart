@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/src/dto/openweather/current/response/current_weather_response_dto.dart';
 import 'package:weather_app/src/ui/widgets/current_weather_widget.dart';
 
 import 'package:weather_app/src/models/current_weather_model.dart';
@@ -24,6 +23,7 @@ class WeatherInfoWidget extends StatelessWidget {
 
   set isVisible(bool isVisible) => _isVisible = isVisible;
   set currentWeatherModel(CurrentWeatherModel currentWeatherModel) => _currentWeatherModel = currentWeatherModel;
+  set listHourlyWeatherModel(List<HourlyWeatherModel> listHourlyWeatherModel) => _listHourlyWeatherModel = listHourlyWeatherModel;
 
   @override
   Widget build(BuildContext context) {

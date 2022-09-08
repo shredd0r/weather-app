@@ -75,7 +75,7 @@ class HourlyWeatherWidget extends StatelessWidget {
             style: const TextStyle(fontSize: 18)
         ),
         Text(
-            "${hourlyWeatherModel.fertilityOfSediments}%"
+            "${hourlyWeatherModel.probabilityOfPrecipitation}%"
         )
       ],
     );

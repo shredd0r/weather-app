@@ -3,9 +3,9 @@ class HourlyWeatherModel {
   HourlyWeatherModel(
       this.temperature,
       this.time,
-      this.fertilityOfSediments);
+      this.probabilityOfPrecipitation);
 
   double temperature;
   DateTime time;
-  double fertilityOfSediments;
+  double probabilityOfPrecipitation;
 }

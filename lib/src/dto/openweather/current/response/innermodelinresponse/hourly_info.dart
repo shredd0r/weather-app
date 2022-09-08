@@ -1,5 +1,6 @@
 
 import 'package:json_annotation/json_annotation.dart';
+import 'package:weather_app/src/dto/openweather/current/response/innermodelinresponse/system_info_pod_info.dart';
 import 'cloud_info_dto.dart';
 import 'main_info_dto.dart';
 import 'precipitation_info_dto.dart';
@@ -39,7 +40,7 @@ class HourlyInfoDto {
   late PrecipitationInfoDto precipitationInfoDtoForSnow;
 
   @JsonKey(name: "sys")
-  late SystemInfoDto systemInfoDto;
+  late SystemPodInfoDto systemInfoDto;
 
   @JsonKey(name: "dt_txt")
   late String datetimeISO;

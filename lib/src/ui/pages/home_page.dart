@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/src/dto/openweather/current/request/impl/current_weather_request_dto.dart';
+import 'package:weather_app/src/dto/openweather/current/request/impl/hourly_weather_request.dart';
 import 'package:weather_app/src/models/current_weather_model.dart';
 import 'package:weather_app/src/models/daily_weather_model.dart';
 import 'package:weather_app/src/models/hourly_weather_model.dart';
@@ -37,8 +38,14 @@ class _HomePageState extends State<HomePage> {
             longitude: 32.2581,
             appId: "c654ce747dc9f2f105fe0eeb463136b9"))
           .then((value) => openWeatherInfoWidget.currentWeatherModel = Mapper.mapCurrentWeatherModel(value))
-          .then((value) => openWeatherInfoWidget.isVisible = true)
-        // openWeatherExecutor.
+          .then((value)=> openWeatherInfoWidget.isVisible = true),
+        openWeatherExecutor.getHourlyWeatherInfo(
+          HourlyWeatherOpenWeatherRequestDto(
+              latitude: 48.5161,
+              longitude: 32.2581,
+              appId: "c654ce747dc9f2f105fe0eeb463136b9"))
+          .then((value)=> openWeatherInfoWidget.listHourlyWeatherModel = Mapper.mapHourlyWeatherModel(value))
+          .then((value)=> openWeatherInfoWidget.isVisible = true)
       });
   }
 
