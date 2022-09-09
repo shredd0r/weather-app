@@ -49,6 +49,34 @@ class _HomePageState extends State<HomePage> {
       });
   }
 
+  void sendRequestMock(BuildContext context) async {
+    var listHourly = [
+      HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 1)), 57),
+      HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 2)), 57),
+      HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 3)), 57),
+      HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 4)), 57),
+      HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 5)), 57)];
+
+    setState(
+        ()=> {
+          openWeatherInfoWidget.isVisible = false,
+          openWeatherInfoWidget.currentWeatherModel = CurrentWeatherModel(
+            "Харків",
+            "П`ятниця",
+            "asd",
+            "Вересень",
+            9,
+            17.1,
+            18.3,
+            14.5,
+            17.3,
+            DateTime.now()),
+          openWeatherInfoWidget.listHourlyWeatherModel = listHourly,
+          openWeatherInfoWidget.isVisible = true
+        }
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -57,7 +85,7 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
             leading: IconButton(
               onPressed: () {
-               sendRequest(context);
+                sendRequestMock(context);
               },
               iconSize: 36.0,
               icon: const Icon(Icons.abc_rounded),

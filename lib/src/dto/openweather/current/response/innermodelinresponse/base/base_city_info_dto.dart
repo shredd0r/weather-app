@@ -5,7 +5,7 @@ import 'package:weather_app/src/dto/openweather/current/response/innermodelinres
 class BaseCityInfoDto {
 
   @JsonKey(name: "id")
-  late String cityId;
+  late int cityId;
 
   late String name;
 

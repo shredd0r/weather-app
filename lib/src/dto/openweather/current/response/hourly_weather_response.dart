@@ -11,7 +11,7 @@ part 'hourly_weather_response.g.dart';
 @JsonSerializable()
 class HourlyWeatherOpenWeatherResponseDto {
 
-  late int cod;
+  late String cod;
 
   late int message;
 

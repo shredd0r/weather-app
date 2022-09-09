@@ -34,10 +34,10 @@ class HourlyInfoDto {
   late double probabilityOfPrecipitation;
 
   @JsonKey(name: "rain")
-  late PrecipitationInfoDto precipitationInfoDtoForRain;
+  late PrecipitationInfoDto? precipitationInfoDtoForRain;
 
   @JsonKey(name: "snow")
-  late PrecipitationInfoDto precipitationInfoDtoForSnow;
+  late PrecipitationInfoDto? precipitationInfoDtoForSnow;
 
   @JsonKey(name: "sys")
   late SystemPodInfoDto systemInfoDto;

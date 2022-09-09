@@ -8,7 +8,7 @@ part 'city_info_dto.g.dart';
 @JsonSerializable()
 class CityInfoDto extends BaseCityInfoDto {
   CityInfoDto(
-      String cityId,
+      int cityId,
       String name,
       CoordinationDto coordinationDto) : super(cityId, name, coordinationDto);
 

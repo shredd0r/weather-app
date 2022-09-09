@@ -19,7 +19,7 @@ class CityInfoDetailDto extends BaseCityInfoDto {
       this.timezone,
       this.sunrise,
       this.sunset,
-      String cityId,
+      int cityId,
       String name,
       CoordinationDto coordinationDto) : super(cityId, name, coordinationDto);
 
