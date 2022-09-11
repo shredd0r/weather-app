@@ -5,8 +5,9 @@ import 'package:weather_app/src/models/current_weather_model.dart';
 import 'package:weather_app/src/models/daily_weather_model.dart';
 import 'package:weather_app/src/models/hourly_weather_model.dart';
 import 'package:weather_app/src/restclient/openweather_rest_client.dart';
+import 'package:weather_app/src/static/constants.dart';
 
-import '../../services/mappers/mapper_provider_executer.dart';
+import '../../services/mappers/mapper.dart';
 import 'weather_information.dart';
 
 class HomePage extends StatefulWidget{
@@ -20,9 +21,9 @@ class _HomePageState extends State<HomePage> {
 
   final OpenWeatherExecutor openWeatherExecutor = OpenWeatherExecutor();
 
-  late WeatherInfoWidget accuWeatherInfoWidget = WeatherInfoWidget(false, "AccuWeather", CurrentWeatherModel.emptyModel(), List<HourlyWeatherModel>.empty(), List<DailyWeatherInfoModel>.empty());
-  late WeatherInfoWidget openWeatherInfoWidget = WeatherInfoWidget(false, "OpenWeather", CurrentWeatherModel.emptyModel(), List<HourlyWeatherModel>.empty(), List<DailyWeatherInfoModel>.empty());
-  late WeatherInfoWidget theWeatherWeatherInfoWidget = WeatherInfoWidget(false, "TheWeather", CurrentWeatherModel.emptyModel(), List<HourlyWeatherModel>.empty(), List<DailyWeatherInfoModel>.empty());
+  late WeatherInfoWidget accuWeatherInfoWidget = WeatherInfoWidget(false, "AccuWeather", CurrentWeatherModel.emptyModel(), List<HourlyWeatherModel>.empty(), List<DailyWeatherDetailModel>.empty());
+  late WeatherInfoWidget openWeatherInfoWidget = WeatherInfoWidget(false, "OpenWeather", CurrentWeatherModel.emptyModel(), List<HourlyWeatherModel>.empty(), List<DailyWeatherDetailModel>.empty());
+  late WeatherInfoWidget theWeatherWeatherInfoWidget = WeatherInfoWidget(false, "TheWeather", CurrentWeatherModel.emptyModel(), List<HourlyWeatherModel>.empty(), List<DailyWeatherDetailModel>.empty());
 
   @override
   void initState() {
@@ -50,7 +51,7 @@ class _HomePageState extends State<HomePage> {
                 "OpenWeather",
                 currentWeatherModel,
                 listHourlyWeatherModel,
-                List<DailyWeatherInfoModel>.empty())))
+                List<DailyWeatherDetailModel>.empty())))
       });
   }
 
@@ -66,12 +67,12 @@ class _HomePageState extends State<HomePage> {
       HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 4)), 57, "non"),
       HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 5)), 57, "non")];
 
-    var dailyModel = DailyWeatherModel(16.4, "description", 12, 10, DateTime.now(), DateTime.now(), 1, 13.2, "iconResource");
+    var dailyModel = DailyWeatherModel(16.4, 19, 12, "description", 12, 10, DateTime.now(), DateTime.now(), 1, 13.2, 1, "iconResource");
 
     var listDaily = [
-      DailyWeatherInfoModel(dailyModel, dailyModel),
-      DailyWeatherInfoModel(dailyModel, dailyModel),
-      DailyWeatherInfoModel(dailyModel, dailyModel),
+      DailyWeatherDetailModel(dailyModel, dailyModel),
+      DailyWeatherDetailModel(dailyModel, dailyModel),
+      DailyWeatherDetailModel(dailyModel, dailyModel),
     ];
 
     setState(
@@ -107,7 +108,7 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {
                 sendRequestMock(context);
               },
-              iconSize: 36.0,
+              iconSize: ConstantUI.weatherIconSize,
               icon: const Icon(Icons.abc_rounded),
             ),
             backgroundColor: Colors.transparent,

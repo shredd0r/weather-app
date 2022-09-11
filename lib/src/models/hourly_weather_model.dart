@@ -11,3 +11,8 @@ class HourlyWeatherModel {
   double probabilityOfPrecipitation;
   String iconResource;
 }
+
+class HourlyWeatherDetailModel {
+
+  HourlyWeatherDetailModel();
+}

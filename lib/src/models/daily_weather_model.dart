@@ -1,6 +1,6 @@
-class DailyWeatherInfoModel {
+class DailyWeatherDetailModel {
 
-  DailyWeatherInfoModel(
+  DailyWeatherDetailModel(
       this.day,
       this.night);
 
@@ -12,6 +12,8 @@ class DailyWeatherModel {
 
   DailyWeatherModel(
       this.averageTemperature,
+      this.minTemperature,
+      this.maxTemperature,
       this.description,
       this.humidity,
       this.indexUV,
@@ -19,9 +21,12 @@ class DailyWeatherModel {
       this.sunsetTime,
       this.windSpeed,
       this.rainfall,
+      this.dayOfWeek,
       this.iconResource);
 
   double averageTemperature;
+  double minTemperature;
+  double maxTemperature;
   String description;
   double humidity;
   double indexUV;
@@ -29,5 +34,23 @@ class DailyWeatherModel {
   DateTime sunsetTime;
   double windSpeed;
   double rainfall;
+  int dayOfWeek;
   String iconResource;
+}
+
+class DailyWeatherItemModel {
+  int dayOfWeek;
+  double maxTemperature;
+  double minTemperature;
+  String iconResourceForDay;
+  String iconResourceForNight;
+  double probabilityOfPrecipitation;
+
+  DailyWeatherItemModel(
+      this.dayOfWeek,
+      this.maxTemperature,
+      this.minTemperature,
+      this.iconResourceForDay,
+      this.iconResourceForNight,
+      this.probabilityOfPrecipitation);
 }

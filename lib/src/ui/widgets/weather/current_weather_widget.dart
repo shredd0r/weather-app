@@ -1,7 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:weather_app/src/models/current_weather_model.dart';
-import 'package:weather_app/src/ui/widgets/border_container_widget.dart';
+import 'package:weather_app/src/static/constants.dart';
+import 'package:weather_app/src/ui/widgets/common/border_container_widget.dart';
 
 class CurrentWeatherWidget extends StatelessWidget {
   const CurrentWeatherWidget(this._currentWeatherModel, {Key? key}) : super(key: key);
@@ -37,10 +38,12 @@ class CurrentWeatherWidget extends StatelessWidget {
                             const SizedBox(height: 7),
                             Row(
                               children: [
-                                IconButton(
-                                    onPressed: () {},
-                                    iconSize: 36,
-                                    icon: const Icon(Icons.ac_unit_sharp)
+                                const Padding(
+                                  padding: EdgeInsets.all(11),
+                                  child: Icon(
+                                    Icons.ac_unit_sharp,
+                                    size: ConstantUI.weatherIconSize,
+                                  ),
                                 ),
                                 Text("${_currentWeatherModel.currentTemperature}°", style: const TextStyle(fontSize: 36))
                               ],
@@ -75,7 +78,7 @@ class CurrentWeatherWidget extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              "Обновленов в: ${_currentWeatherModel.lastUpdate}",
+              "Обновлено в: ${_currentWeatherModel.lastUpdate}",
               style: const TextStyle(
                   color: Colors.black38,
                   fontSize: 12),

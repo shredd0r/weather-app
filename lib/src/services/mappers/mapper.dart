@@ -2,6 +2,7 @@ import 'package:weather_app/src/dto/openweather/current/response/current_weather
 import 'package:weather_app/src/dto/openweather/current/response/hourly_weather_response.dart';
 import 'package:weather_app/src/dto/openweather/current/response/innermodelinresponse/hourly_info.dart';
 import 'package:weather_app/src/models/current_weather_model.dart';
+import 'package:weather_app/src/models/daily_weather_model.dart';
 import 'package:weather_app/src/models/hourly_weather_model.dart';
 
 
@@ -43,5 +44,15 @@ class Mapper {
       DateTime.fromMicrosecondsSinceEpoch(hourlyInfoDto.datetimeForecasted),
       hourlyInfoDto.probabilityOfPrecipitation,
       hourlyInfoDto.weatherInfoDtoList[0].icon as String);
+  }
+
+  static DailyWeatherItemModel mapDailyWeatherItemModel(DailyWeatherDetailModel dailyWeatherDetailModel) {
+    return DailyWeatherItemModel(
+      dailyWeatherDetailModel.day.dayOfWeek,
+      dailyWeatherDetailModel.day.maxTemperature,
+      dailyWeatherDetailModel.night.minTemperature,
+      dailyWeatherDetailModel.day.iconResource,
+      dailyWeatherDetailModel.night.iconResource,
+      dailyWeatherDetailModel.day.rainfall);
   }
 }

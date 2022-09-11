@@ -13,7 +13,7 @@ class BorderContainerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 15, right: 15),
-      child: Container(   //TODO change to Expanded
+      child: Container(
         height: height,
         width: width,
         decoration: BoxDecoration(

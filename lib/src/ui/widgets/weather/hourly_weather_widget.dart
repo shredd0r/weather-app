@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/src/models/hourly_weather_model.dart';
+import 'package:weather_app/src/static/constants.dart';
 import 'package:weather_app/src/ui/factory/padding_for_list_item_factory.dart';
-import 'package:weather_app/src/ui/widgets/border_container_widget.dart';
+import 'package:weather_app/src/ui/widgets/common/border_container_widget.dart';
 
-import '../../models/hourly_weather_model.dart';
 
 class HourlyWeatherWidget extends StatelessWidget {
 
@@ -18,14 +19,14 @@ class HourlyWeatherWidget extends StatelessWidget {
         .map((model) => HourlyWeatherInfoWidget.byHourlyWeatherModel(model)).toList();
 
     return Center(
-      child: BorderContainerWidget(   // TODO change to Expanded
-        height: 150,
+      child: BorderContainerWidget(
+        height: 160,
         width: 1000,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: hourlyWeatherInfoWidgetList.length,
           itemBuilder: ((context, index) {
-            return PaddingForListItemFactory.getWidgetWithPadding(hourlyWeatherInfoWidgetList[index], hourlyWeatherInfoWidgetList, 11);
+            return PaddingForListItemFactory.getWidgetWithPadding(hourlyWeatherInfoWidgetList[index], hourlyWeatherInfoWidgetList, 12);
           }),
         )
       )
@@ -56,20 +57,27 @@ class HourlyWeatherInfoWidget extends StatelessWidget {
       Column(
       children: [
         Text(
-          "$hour:$minute",
+          // "$hour:$minute",
+          "00:00",
           style: const TextStyle(fontSize: 20),
         ),
-        IconButton(
-            onPressed: () {},
-            iconSize: 36,
-            icon: const Icon(Icons.ac_unit_sharp)
+        const Padding(
+          padding: EdgeInsets.only(top: 11, bottom: 11),
+          child: Icon(
+              Icons.ac_unit_sharp,
+              size: ConstantUI.weatherIconSize,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 4),
+          child: Text(
+              "$temperature°",
+              style: const TextStyle(fontSize: 20)
+          ),
         ),
         Text(
-            "$temperature°",
-            style: const TextStyle(fontSize: 18)
-        ),
-        Text(
-            "$probabilityOfPrecipitation%"
+            "$probabilityOfPrecipitation%",
+            style: const TextStyle(fontSize: 16)
         )
         ],
     );

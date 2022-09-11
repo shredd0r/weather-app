@@ -1,5 +1,0 @@
-
-class HourlyWeatherDetailModel {
-
-  HourlyWeatherDetailModel();
-}
