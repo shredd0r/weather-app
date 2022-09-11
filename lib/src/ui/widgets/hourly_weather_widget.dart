@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/src/ui/factory/padding_for_list_item_factory.dart';
+import 'package:weather_app/src/ui/widgets/border_container_widget.dart';
 
 import '../../models/hourly_weather_model.dart';
 
@@ -12,57 +14,49 @@ class HourlyWeatherWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<HourlyWeatherInfoWidget> hourlyWeatherInfoWidgetList = _listHourlyWeatherModel
+        .map((model) => HourlyWeatherInfoWidget.byHourlyWeatherModel(model)).toList();
+
     return Center(
-      child: Padding(
-        padding: const EdgeInsets.only(left: 15, right: 15),
-        child: Container(
-          padding: const EdgeInsets.all(15),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-                color: Colors.black
-            ),
-          ),
-          child: Table(
-              columnWidths: _getMapTableColumnWidth(),
-              children: <TableRow> [ TableRow(children: _getListWithWidget()) ]
-          ),
+      child: BorderContainerWidget(
+        height: 150,
+        width: 1000,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: hourlyWeatherInfoWidgetList.length,
+          itemBuilder: ((context, index) {
+            return PaddingForListItemFactory.getWidgetWithPadding(hourlyWeatherInfoWidgetList[index], hourlyWeatherInfoWidgetList, 11);
+          }),
         )
       )
     );
   }
+}
 
-  Map<int, TableColumnWidth> _getMapTableColumnWidth() {
-    Map<int, TableColumnWidth> mapTableColumnWidth = <int, TableColumnWidth>{};
-    var indexForMapTableColumnWidth = 0;
 
-    for(int index = 0; index < _listHourlyWeatherModel.length - 1; index++) {
-      mapTableColumnWidth.putIfAbsent(indexForMapTableColumnWidth, () => const IntrinsicColumnWidth());
-      indexForMapTableColumnWidth++;
-      mapTableColumnWidth.putIfAbsent(indexForMapTableColumnWidth, () => const FlexColumnWidth());
-      indexForMapTableColumnWidth++;
-    }
-    mapTableColumnWidth.putIfAbsent(indexForMapTableColumnWidth, () => const IntrinsicColumnWidth());
-    return mapTableColumnWidth;
+class HourlyWeatherInfoWidget extends StatelessWidget {
+
+  late final int hour;
+  late final int minute;
+  late final double temperature;
+  late final double probabilityOfPrecipitation;
+
+  HourlyWeatherInfoWidget(this.hour, this.minute, this.temperature, this.probabilityOfPrecipitation, {Key? key}) : super(key: key);
+
+  HourlyWeatherInfoWidget.byHourlyWeatherModel(HourlyWeatherModel hourlyWeatherModel, {Key? key}) : super(key: key) {
+    hour = hourlyWeatherModel.time.hour;
+    minute = hourlyWeatherModel.time.minute;
+    temperature = hourlyWeatherModel.temperature;
+    probabilityOfPrecipitation = hourlyWeatherModel.probabilityOfPrecipitation;
   }
 
-  List<Widget> _getListWithWidget() {
-    List<Widget> listWidget = <Widget>[];
-
-    for(int index = 0; index < _listHourlyWeatherModel.length - 1; index++) {
-      listWidget.add(_addWidgetWithHourlyWeather(_listHourlyWeatherModel.elementAt(index)));
-      listWidget.add(const SizedBox(height: 1));
-    }
-
-    listWidget.add(_addWidgetWithHourlyWeather(_listHourlyWeatherModel.last));
-    return listWidget;
-  }
-
-  Widget _addWidgetWithHourlyWeather(HourlyWeatherModel hourlyWeatherModel) {
-    return Column(
+  @override
+  Widget build(BuildContext context) {
+    return
+      Column(
       children: [
         Text(
-          "${hourlyWeatherModel.time.hour}:${hourlyWeatherModel.time.minute}",
+          "$hour:$minute",
           style: const TextStyle(fontSize: 20),
         ),
         IconButton(
@@ -71,13 +65,14 @@ class HourlyWeatherWidget extends StatelessWidget {
             icon: const Icon(Icons.ac_unit_sharp)
         ),
         Text(
-            "${hourlyWeatherModel.temperature}°",
+            "$temperature°",
             style: const TextStyle(fontSize: 18)
         ),
         Text(
-            "${hourlyWeatherModel.probabilityOfPrecipitation}%"
+            "$probabilityOfPrecipitation%"
         )
-      ],
+        ],
     );
   }
+
 }
