@@ -10,6 +10,7 @@ class CurrentWeatherModel {
       this.minTemperature,
       this.maxTemperature,
       this.fillLikeTemperature,
+      this.iconResource,
       this.lastUpdate);
 
   late String cityName;
@@ -21,6 +22,7 @@ class CurrentWeatherModel {
   late double minTemperature;
   late double maxTemperature;
   late double fillLikeTemperature;
+  late String iconResource;
   late DateTime lastUpdate;
 
   CurrentWeatherModel.emptyModel();

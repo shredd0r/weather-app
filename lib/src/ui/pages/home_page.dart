@@ -37,33 +37,49 @@ class _HomePageState extends State<HomePage> {
             latitude: 48.5161,
             longitude: 32.2581,
             appId: "c654ce747dc9f2f105fe0eeb463136b9"))
-          .then((value) => openWeatherInfoWidget.currentWeatherModel = Mapper.mapCurrentWeatherModel(value)),
-        openWeatherExecutor.getHourlyWeatherInfo(
-          HourlyWeatherOpenWeatherRequestDto(
-              latitude: 48.5161,
-              longitude: 32.2581,
-              appId: "c654ce747dc9f2f105fe0eeb463136b9"))
-          .then((value)=> openWeatherInfoWidget.listHourlyWeatherModel = Mapper.mapHourlyWeatherModel(value))
-          .then((value)=> openWeatherInfoWidget.isVisible = true)
+          .then((currentWeatherResponse) => Mapper.mapCurrentWeatherModel(currentWeatherResponse))
+          .then((currentWeatherModel) =>
+            openWeatherExecutor.getHourlyWeatherInfo(
+              HourlyWeatherOpenWeatherRequestDto(
+                  latitude: 48.5161,
+                  longitude: 32.2581,
+                  appId: "c654ce747dc9f2f105fe0eeb463136b9"))
+              .then((hourlyWeatherResponse)=> Mapper.mapHourlyWeatherModel(hourlyWeatherResponse))
+              .then((listHourlyWeatherModel)=> openWeatherInfoWidget = WeatherInfoWidget(
+                true,
+                "OpenWeather",
+                currentWeatherModel,
+                listHourlyWeatherModel,
+                List<DailyWeatherInfoModel>.empty())))
       });
   }
 
   void sendRequestMock(BuildContext context) async {
     var listHourly = [
-      HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 1)), 57),
-      HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 2)), 57),
-      HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 3)), 57),
-      HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 4)), 57),
-      HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 4)), 57),
-      HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 4)), 57),
-      HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 4)), 57),
-      HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 4)), 57),
-      HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 5)), 57)];
+      HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 1)), 57, "non"),
+      HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 2)), 57, "non"),
+      HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 3)), 57, "non"),
+      HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 4)), 57, "non"),
+      HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 4)), 57, "non"),
+      HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 4)), 57, "non"),
+      HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 4)), 57, "non"),
+      HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 4)), 57, "non"),
+      HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 5)), 57, "non")];
+
+    var dailyModel = DailyWeatherModel(16.4, "description", 12, 10, DateTime.now(), DateTime.now(), 1, 13.2, "iconResource");
+
+    var listDaily = [
+      DailyWeatherInfoModel(dailyModel, dailyModel),
+      DailyWeatherInfoModel(dailyModel, dailyModel),
+      DailyWeatherInfoModel(dailyModel, dailyModel),
+    ];
 
     setState(
         ()=> {
-          openWeatherInfoWidget.isVisible = false,
-          openWeatherInfoWidget.currentWeatherModel = CurrentWeatherModel(
+          openWeatherInfoWidget = WeatherInfoWidget(
+          true,
+          "OpenWeather",
+          CurrentWeatherModel(
             "Харків",
             "П`ятниця",
             "asd",
@@ -73,9 +89,10 @@ class _HomePageState extends State<HomePage> {
             18.3,
             14.5,
             17.3,
+            "non",
             DateTime.now()),
-          openWeatherInfoWidget.listHourlyWeatherModel = listHourly,
-          openWeatherInfoWidget.isVisible = true
+          listHourly,
+          listDaily)
         }
     );
   }

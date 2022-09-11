@@ -1,10 +1,9 @@
 
 import 'package:json_annotation/json_annotation.dart';
-import 'package:weather_app/src/dto/openweather/current/response/innermodelinresponse/system_info_pod_info.dart';
 import 'cloud_info_dto.dart';
 import 'main_info_dto.dart';
 import 'precipitation_info_dto.dart';
-import 'system_info_dto.dart';
+import 'system_info_pod_info.dart';
 import 'weather_dto.dart';
 import 'wind_info_dto.dart';
 

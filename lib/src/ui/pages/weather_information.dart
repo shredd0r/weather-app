@@ -8,23 +8,19 @@ import 'package:weather_app/src/ui/widgets/daily_weather_widget.dart';
 import 'package:weather_app/src/ui/widgets/hourly_weather_widget.dart';
 
 class WeatherInfoWidget extends StatelessWidget {
-  WeatherInfoWidget(
+  final bool _isVisible;
+  final String _providerName;
+  final CurrentWeatherModel _currentWeatherModel;
+  final List<HourlyWeatherModel> _listHourlyWeatherModel;
+  final List<DailyWeatherInfoModel> _listDailyWeatherInfoModel;
+
+  const WeatherInfoWidget(
       this._isVisible,
       this._providerName,
       this._currentWeatherModel,
       this._listHourlyWeatherModel,
       this._listDailyWeatherInfoModel,
       {Key? key}) : super(key: key);
-  late bool _isVisible;
-  late final String _providerName;
-  late CurrentWeatherModel _currentWeatherModel;
-  late List<HourlyWeatherModel> _listHourlyWeatherModel;
-  late List<DailyWeatherInfoModel> _listDailyWeatherInfoModel;
-
-  set isVisible(bool isVisible) => _isVisible = isVisible;
-  set currentWeatherModel(CurrentWeatherModel currentWeatherModel) => _currentWeatherModel = currentWeatherModel;
-  set listHourlyWeatherModel(List<HourlyWeatherModel> listHourlyWeatherModel) => _listHourlyWeatherModel = listHourlyWeatherModel;
-  set listDailyWeatherInfoModel(List<DailyWeatherInfoModel> listDailyWeatherInfoModel) => _listDailyWeatherInfoModel = listDailyWeatherInfoModel;
 
   @override
   Widget build(BuildContext context) {
@@ -37,19 +33,21 @@ class WeatherInfoWidget extends StatelessWidget {
                         _providerName,
                         style: const TextStyle(fontSize: 30))
                 ),
-                Visibility(
-                    visible: _isVisible,
-                    replacement: const Center(child: CircularProgressIndicator()),
-                    child: Column(
-                      children: [
-                        const SizedBox(height: 25),
-                        CurrentWeatherWidget(_currentWeatherModel),
-                        const SizedBox(height: 15),
-                        HourlyWeatherWidget(_listHourlyWeatherModel),
-                        const SizedBox(height: 15),
-                        DailyWeatherWidget(_listDailyWeatherInfoModel)
-                      ],
-                    )
+                Expanded(
+                  child: Visibility(
+                      visible: _isVisible,
+                      replacement: const Center(child: CircularProgressIndicator()),
+                      child: ListView(
+                        children: [
+                          const SizedBox(height: 25),
+                          CurrentWeatherWidget(_currentWeatherModel),
+                          const SizedBox(height: 15),
+                          HourlyWeatherWidget(_listHourlyWeatherModel),
+                          const SizedBox(height: 15),
+                          DailyWeatherWidget(_listDailyWeatherInfoModel)
+                        ],
+                      )
+                  ),
                 )
             ]  // const
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/src/ui/widgets/border_container_widget.dart';
 import '../../models/daily_weather_model.dart';
 
 class DailyWeatherWidget extends StatelessWidget {
@@ -10,19 +11,16 @@ class DailyWeatherWidget extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Center(
-        child: Padding(
-            padding: const EdgeInsets.only(left: 15, right: 15),
-            child: Container(
-              padding: const EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(
-                    color: Colors.black
-                ),
-              ),
-              child: Text("Hello")
-            )
+      child: BorderContainerWidget(
+        height: 10000,
+        width: 385,
+        child: ListView.builder(
+          itemCount: _listDailyWeatherInfoModel.length,
+          itemBuilder: ((context, index) {
+            return const Text("hello");
+          })
         )
+      )
     );
   }
 

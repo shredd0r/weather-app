@@ -24,6 +24,7 @@ class Mapper {
       response.mainInfoModel!.minTemperature as double,
       response.mainInfoModel!.maxTemperature as double,
       response.mainInfoModel!.feelsLike as double,
+      response.weather[0].icon as String,
       datetimeNow);
   }
 
@@ -40,6 +41,7 @@ class Mapper {
     return HourlyWeatherModel(
       hourlyInfoDto.mainInfoDto!.temperature as double,
       DateTime.fromMicrosecondsSinceEpoch(hourlyInfoDto.datetimeForecasted),
-      hourlyInfoDto.probabilityOfPrecipitation);
+      hourlyInfoDto.probabilityOfPrecipitation,
+      hourlyInfoDto.weatherInfoDtoList[0].icon as String);
   }
 }

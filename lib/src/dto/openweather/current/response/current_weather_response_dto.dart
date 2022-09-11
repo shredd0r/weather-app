@@ -16,7 +16,7 @@ class CurrentWeatherOpenWeatherResponseDto {
   @JsonKey(name: "coord")
   late CoordinationDto? coordination;
 
-  late List<WeatherInfoDto>? weather;
+  late List<WeatherInfoDto> weather;
 
   late String base;
 
@@ -53,7 +53,7 @@ class CurrentWeatherOpenWeatherResponseDto {
   CurrentWeatherOpenWeatherResponseDto(
       {
         this.coordination,
-        this.weather,
+        required this.weather,
         required this.base,
         this.mainInfoModel,
         required this.visibility,

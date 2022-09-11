@@ -18,7 +18,7 @@ class HourlyWeatherWidget extends StatelessWidget {
         .map((model) => HourlyWeatherInfoWidget.byHourlyWeatherModel(model)).toList();
 
     return Center(
-      child: BorderContainerWidget(
+      child: BorderContainerWidget(   // TODO change to Expanded
         height: 150,
         width: 1000,
         child: ListView.builder(

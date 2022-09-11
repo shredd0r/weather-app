@@ -18,7 +18,8 @@ class DailyWeatherModel {
       this.sunriseTime,
       this.sunsetTime,
       this.windSpeed,
-      this.rainfall);
+      this.rainfall,
+      this.iconResource);
 
   double averageTemperature;
   String description;
@@ -28,4 +29,5 @@ class DailyWeatherModel {
   DateTime sunsetTime;
   double windSpeed;
   double rainfall;
+  String iconResource;
 }
