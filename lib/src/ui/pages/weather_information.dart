@@ -16,7 +16,7 @@ class WeatherInfoWidget extends StatelessWidget {
       this._listDailyWeatherInfoModel,
       {Key? key}) : super(key: key);
   late bool _isVisible;
-  late String _providerName;
+  late final String _providerName;
   late CurrentWeatherModel _currentWeatherModel;
   late List<HourlyWeatherModel> _listHourlyWeatherModel;
   late List<DailyWeatherInfoModel> _listDailyWeatherInfoModel;
@@ -24,6 +24,7 @@ class WeatherInfoWidget extends StatelessWidget {
   set isVisible(bool isVisible) => _isVisible = isVisible;
   set currentWeatherModel(CurrentWeatherModel currentWeatherModel) => _currentWeatherModel = currentWeatherModel;
   set listHourlyWeatherModel(List<HourlyWeatherModel> listHourlyWeatherModel) => _listHourlyWeatherModel = listHourlyWeatherModel;
+  set listDailyWeatherInfoModel(List<DailyWeatherInfoModel> listDailyWeatherInfoModel) => _listDailyWeatherInfoModel = listDailyWeatherInfoModel;
 
   @override
   Widget build(BuildContext context) {

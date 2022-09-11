@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import '../../models/daily_weather_model.dart';
 
 class DailyWeatherWidget extends StatelessWidget {
-  DailyWeatherWidget(this._listDailyWeatherInfoModel, {Key? key}) : super(key: key);
+  const DailyWeatherWidget(this._listDailyWeatherInfoModel, {Key? key}) : super(key: key);
 
-  List<DailyWeatherInfoModel> _listDailyWeatherInfoModel;
+  final List<DailyWeatherInfoModel> _listDailyWeatherInfoModel;
 
   @override
   Widget build(BuildContext context) {

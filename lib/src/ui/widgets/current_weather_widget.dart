@@ -1,25 +1,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:weather_app/src/models/current_weather_model.dart';
+import 'package:weather_app/src/ui/widgets/border_container_widget.dart';
 
 class CurrentWeatherWidget extends StatelessWidget {
-  CurrentWeatherWidget(this._currentWeatherModel, {Key? key}) : super(key: key);
+  const CurrentWeatherWidget(this._currentWeatherModel, {Key? key}) : super(key: key);
 
-  late CurrentWeatherModel _currentWeatherModel;
+  final CurrentWeatherModel _currentWeatherModel;
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return Padding(
-      padding: const EdgeInsets.only(left: 15, right: 15),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: Colors.black
-          ),
-      ),
-        padding: const EdgeInsets.all(15),
+    return BorderContainerWidget(
         child: Column(
           children: [
             Table(
@@ -91,7 +82,6 @@ class CurrentWeatherWidget extends StatelessWidget {
             ),
           ],
         ),
-      ),
     );
   }
 

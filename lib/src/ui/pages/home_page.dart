@@ -37,8 +37,7 @@ class _HomePageState extends State<HomePage> {
             latitude: 48.5161,
             longitude: 32.2581,
             appId: "c654ce747dc9f2f105fe0eeb463136b9"))
-          .then((value) => openWeatherInfoWidget.currentWeatherModel = Mapper.mapCurrentWeatherModel(value))
-          .then((value)=> openWeatherInfoWidget.isVisible = true),
+          .then((value) => openWeatherInfoWidget.currentWeatherModel = Mapper.mapCurrentWeatherModel(value)),
         openWeatherExecutor.getHourlyWeatherInfo(
           HourlyWeatherOpenWeatherRequestDto(
               latitude: 48.5161,
@@ -54,6 +53,10 @@ class _HomePageState extends State<HomePage> {
       HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 1)), 57),
       HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 2)), 57),
       HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 3)), 57),
+      HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 4)), 57),
+      HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 4)), 57),
+      HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 4)), 57),
+      HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 4)), 57),
       HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 4)), 57),
       HourlyWeatherModel(16.3, DateTime.now().add(const Duration(hours: 5)), 57)];
 
