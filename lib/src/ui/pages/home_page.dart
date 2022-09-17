@@ -25,11 +25,6 @@ class _HomePageState extends State<HomePage> {
   late WeatherInfoWidget openWeatherInfoWidget = WeatherInfoWidget(false, "OpenWeather", CurrentWeatherModel.emptyModel(), List<HourlyWeatherModel>.empty(), List<DailyWeatherDetailModel>.empty());
   late WeatherInfoWidget theWeatherWeatherInfoWidget = WeatherInfoWidget(false, "TheWeather", CurrentWeatherModel.emptyModel(), List<HourlyWeatherModel>.empty(), List<DailyWeatherDetailModel>.empty());
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
   void sendRequest(BuildContext context) async {
     setState(
       ()=> {
@@ -71,8 +66,18 @@ class _HomePageState extends State<HomePage> {
 
     var listDaily = [
       DailyWeatherDetailModel(dailyModel, dailyModel),
+      // DailyWeatherDetailModel(dailyModel, dailyModel),
       DailyWeatherDetailModel(dailyModel, dailyModel),
       DailyWeatherDetailModel(dailyModel, dailyModel),
+      DailyWeatherDetailModel(dailyModel, dailyModel),
+      DailyWeatherDetailModel(dailyModel, dailyModel),
+      DailyWeatherDetailModel(dailyModel, dailyModel),
+      DailyWeatherDetailModel(dailyModel, dailyModel),
+      DailyWeatherDetailModel(dailyModel, dailyModel),
+      DailyWeatherDetailModel(dailyModel, dailyModel),
+      DailyWeatherDetailModel(dailyModel, dailyModel),
+      DailyWeatherDetailModel(dailyModel, dailyModel),
+
     ];
 
     setState(

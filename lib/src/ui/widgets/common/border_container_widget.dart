@@ -6,13 +6,21 @@ class BorderContainerWidget extends StatelessWidget {
   final Widget child;
   final double? height;
   final double? width;
+  final double innerPadding;
+  final double outerPadding;
 
-  const BorderContainerWidget({required this.child, this.height, this.width, Key? key}) : super(key: key);
+  const BorderContainerWidget({
+    required this.child,
+    this.innerPadding = 15,
+    this.outerPadding = 15,
+    this.height,
+    this.width,
+    Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 15, right: 15),
+      padding: EdgeInsets.only(left: outerPadding, right: outerPadding),
       child: Container(
         height: height,
         width: width,
@@ -20,7 +28,7 @@ class BorderContainerWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: Colors.black)
         ),
-        padding: const EdgeInsets.all(15),
+        padding: EdgeInsets.all(innerPadding),
         child: child)
     );
   }
