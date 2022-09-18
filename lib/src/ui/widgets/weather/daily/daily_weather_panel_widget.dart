@@ -50,7 +50,6 @@ class _DailyInfoWeatherWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String hi = "Wednesday";
 
     return Table(
         columnWidths: const <int, TableColumnWidth> {
@@ -60,53 +59,75 @@ class _DailyInfoWeatherWidget extends StatelessWidget {
         children: [
           TableRow(
               children: [
-                TableCell(
-                    verticalAlignment: TableCellVerticalAlignment.middle,
-                    child: Text(hi, style: const TextStyle(fontSize: ConstantUI.textDayOfWeekFontSize))
-                ),
-                TableCell(
-                  verticalAlignment: TableCellVerticalAlignment.middle,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 5, right: 5),
-                    child: Text(
-                        "${_dailyWeatherItemModel.probabilityOfPrecipitation}%",
-                        style: const TextStyle(fontSize: ConstantUI.textPercentAndTemperatureFontSize)
-                    ),
-                  ),
-                ),
-                TableCell(
-                    verticalAlignment: TableCellVerticalAlignment.middle,
-                    child: Row(
-                      children: const [
-                        Icon(
-                            Icons.ac_unit,
-                            size: ConstantUI.dailyWeatherIconSize),
-                        SizedBox(width: 2),
-                        Icon(
-                            Icons.ac_unit,
-                            size: ConstantUI.dailyWeatherIconSize),
-                      ],
-                    )
-                ),
-                TableCell(
-                    verticalAlignment: TableCellVerticalAlignment.middle,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 5, right: 5),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 5, right: 5),
-                        child: Text("${_dailyWeatherItemModel.maxTemperature}° / ${_dailyWeatherItemModel.minTemperature}°",
-                            style: const TextStyle(fontSize: ConstantUI.textPercentAndTemperatureFontSize)),
-                      ),
-                    )
-                ),
-                TableCell(child:
-                isExpanded ?
-                const Icon(Icons.add):
-                const Icon(Icons.add_box)
-                )
+                _firstCell(context),
+                _secondCell(context),
+                _thirdCell(context),
+                _fourthCell(context),
+                _fifthCell(context)
               ]
           )
         ]
+    );
+  }
+
+  Widget _firstCell(BuildContext context) {
+    String hi = "Wednesday";
+
+    return TableCell(
+        verticalAlignment: TableCellVerticalAlignment.middle,
+        child: Text(hi, style: const TextStyle(fontSize: ConstantUI.textDayOfWeekFontSize))
+    );
+  }
+
+  Widget _secondCell(BuildContext context) {
+    return TableCell(
+      verticalAlignment: TableCellVerticalAlignment.middle,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 5, right: 5),
+        child: Text(
+            "${_dailyWeatherItemModel.probabilityOfPrecipitation}%",
+            style: const TextStyle(fontSize: ConstantUI.textPercentAndTemperatureFontSize)
+        ),
+      ),
+    );
+  }
+
+  Widget _thirdCell(BuildContext context) {
+    return TableCell(
+        verticalAlignment: TableCellVerticalAlignment.middle,
+        child: Row(
+          children: const [
+            Icon(
+                Icons.ac_unit,
+                size: ConstantUI.dailyWeatherIconSize),
+            SizedBox(width: 2),
+            Icon(
+                Icons.ac_unit,
+                size: ConstantUI.dailyWeatherIconSize),
+          ],
+        )
+    );
+  }
+
+  Widget _fourthCell(BuildContext context) {
+    return TableCell(
+        verticalAlignment: TableCellVerticalAlignment.middle,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 5, right: 5),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 5, right: 5),
+            child: Text("${_dailyWeatherItemModel.maxTemperature}° / ${_dailyWeatherItemModel.minTemperature}°",
+                style: const TextStyle(fontSize: ConstantUI.textPercentAndTemperatureFontSize)),
+          ),
+        )
+    );
+  }
+
+  Widget _fifthCell(BuildContext context) {
+    return TableCell(child:
+      isExpanded ?
+      const Icon(Icons.add):
+      const Icon(Icons.add_box)
     );
   }
 }
@@ -135,66 +156,107 @@ class _DailyDetailInfoWeatherWidget extends StatelessWidget {
   }
 
   Widget buildDailyWeatherWidget(DailyWeatherModel model, bool isDay) {
-    var namePeriod = isDay ? "Day" : "Night";
 
-    return Table(
-      columnWidths: const <int, TableColumnWidth>{
-        0: IntrinsicColumnWidth(),
-        1: FlexColumnWidth(),
-        2: IntrinsicColumnWidth()
-      },
+    return Column(
       children: [
-        TableRow(
-            children: [
-              TableCell(
-                verticalAlignment: TableCellVerticalAlignment.middle,
-                child: Column(
+        Table(
+          columnWidths: const <int, TableColumnWidth>{
+            0: IntrinsicColumnWidth(),
+            1: FlexColumnWidth(),
+            2: IntrinsicColumnWidth()
+          },
+          children: [
+            TableRow(
+                children: [
+                  _firstCell(model, isDay),
+                  const SizedBox(width: 1),
+                  _thirdCell(model)
+                ],
+            ),
+          ]
+        ),
+        Center(
+          child: Padding(
+            padding: const EdgeInsets.only(top: ConstantUI.paddingSize, bottom: ConstantUI.paddingSize),
+            child: Text(model.description, style: const TextStyle(fontSize: ConstantUI.textPercentAndTemperatureFontSize)),
+          ),
+        ),
+        BorderContainerWidget(
+            child: Table(
+              columnWidths: const <int, TableColumnWidth>{
+                0: IntrinsicColumnWidth(),
+                1: FlexColumnWidth(),
+                2: IntrinsicColumnWidth()
+              },
+              children: [
+                TableRow(
                   children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        namePeriod,
-                        style: const TextStyle(
-                            fontSize: ConstantUI.textDayOfWeekFontSize),
+                    TableCell(
+                      child: Column(
+                        children: [
+                          Text("Влажность"),
+                          Text(model.humidity.toString())
+                        ],
+                      )
+                    ),
+                    TableCell(
+                      child: Column(
+                        children: [
+                          Text("UV индекс"),
+                          Text(model.indexUV.toString())
+                        ],
                       ),
-                    ),
-                    const SizedBox(height: 5),
-                    IconText(
-                      "${model.averageTemperature}°",
-                      Icons.ac_unit,
-                      size: ConstantUI.textDayOfWeekFontSize
-                    )
-                  ],
-                ),
-              ),
-              const SizedBox(width: 1),
-              TableCell(
-                verticalAlignment: TableCellVerticalAlignment.middle,
-                child: Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: IconText("${model.rainfall}%", Icons.ac_unit),
-                    ),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: IconText("${model.windSpeed} m/c", Icons.access_alarm_outlined)
                     )
                   ]
                 )
-              )
-            ],
-        ),
-        TableRow(
-          children: [
-            const SizedBox(),
-            Align(
-                alignment: Alignment.center,
-                child: Text(model.description)),
-            const SizedBox()
-          ]
+              ],
+            )
         )
-      ]
+      ],
+    );
+  }
+
+  Widget _firstCell(DailyWeatherModel model, bool isDay) {
+    var namePeriod = isDay ? "Day" : "Night";
+
+    return TableCell(
+      verticalAlignment: TableCellVerticalAlignment.middle,
+      child: Column(
+        children: [
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              namePeriod,
+              style: const TextStyle(
+                  fontSize: ConstantUI.textDayOfWeekFontSize),
+            ),
+          ),
+          const SizedBox(height: 5),
+          IconText(
+              "${model.averageTemperature}°",
+              Icons.ac_unit,
+              size: ConstantUI.textDayOfWeekFontSize
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _thirdCell(DailyWeatherModel model) {
+    return TableCell(
+        verticalAlignment: TableCellVerticalAlignment.middle,
+        child: Column(
+            children: [
+              Align(
+                alignment: Alignment.centerRight,
+                child: IconText("${model.rainfall}%", Icons.ac_unit),
+              ),
+              Align(
+                  alignment: Alignment.centerRight,
+                  child: IconText("${model.windSpeed} m/c", Icons.access_alarm_outlined)
+              )
+            ]
+        )
     );
   }
 }

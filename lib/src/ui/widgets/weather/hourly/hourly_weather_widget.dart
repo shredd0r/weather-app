@@ -62,14 +62,14 @@ class HourlyWeatherInfoWidget extends StatelessWidget {
           style: const TextStyle(fontSize: 20),
         ),
         const Padding(
-          padding: EdgeInsets.only(top: 11, bottom: 11),
+          padding: EdgeInsets.only(top: 10, bottom: 10),
           child: Icon(
               Icons.ac_unit_sharp,
               size: ConstantUI.weatherIconSize,
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(bottom: 4),
+          padding: const EdgeInsets.only(bottom: ConstantUI.paddingSize),
           child: Text(
               "$temperature°",
               style: const TextStyle(fontSize: 20)
