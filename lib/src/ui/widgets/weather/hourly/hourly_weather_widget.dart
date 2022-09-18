@@ -77,7 +77,7 @@ class HourlyWeatherInfoWidget extends StatelessWidget {
         ),
         Text(
             "$probabilityOfPrecipitation%",
-            style: const TextStyle(fontSize: 16)
+            style: const TextStyle(fontSize: ConstantUI.textPercentAndTemperatureFontSize)
         )
         ],
     );

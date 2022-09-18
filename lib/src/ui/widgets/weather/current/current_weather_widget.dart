@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/src/models/current_weather_model.dart';
 import 'package:weather_app/src/static/constants.dart';
 import 'package:weather_app/src/ui/widgets/common/border_container_widget.dart';
+import 'package:weather_app/src/ui/widgets/common/icon_text_widget.dart';
 
 class CurrentWeatherWidget extends StatelessWidget {
   const CurrentWeatherWidget(this._currentWeatherModel, {Key? key}) : super(key: key);
@@ -20,7 +21,7 @@ class CurrentWeatherWidget extends StatelessWidget {
               1: FlexColumnWidth(),
               2: IntrinsicColumnWidth()
             },
-            children: <TableRow> [
+            children: [
               TableRow(
                 children: [
                   TableCell(
@@ -30,26 +31,26 @@ class CurrentWeatherWidget extends StatelessWidget {
                           alignment: Alignment.centerLeft,
                           child: Text(_currentWeatherModel.cityName, style: const TextStyle(fontSize: 28)),
                         ),
-                        const SizedBox(height: 0),
                         Align(
                           alignment: Alignment.centerLeft,
-                          child: Text("${_currentWeatherModel.dayOfWeek}, ${_currentWeatherModel.day} ${_currentWeatherModel.month}", style: const TextStyle(fontSize: 14)),
-                        ),
-                        const SizedBox(height: 7),
-                        Row(
-                          children: [
-                            const Padding(
-                              padding: EdgeInsets.all(11),
-                              child: Icon(
-                                Icons.ac_unit_sharp,
-                                size: ConstantUI.weatherIconSize,
-                              ),
-                            ),
-                            Text("${_currentWeatherModel.currentTemperature}°", style: const TextStyle(fontSize: 36))
-                          ],
+                          child: Text(
+                              "${_currentWeatherModel.dayOfWeek}, ${_currentWeatherModel.month} ${_currentWeatherModel.day}",
+                              style: const TextStyle(fontSize: ConstantUI.textDayOfWeekFontSize)),
                         )
                       ]
                     )
+                  ),
+                  const TableCell(child: SizedBox()),
+                  const TableCell(child: SizedBox())
+                ]
+              ),
+              TableRow(
+                children: [
+                  TableCell(
+                    verticalAlignment: TableCellVerticalAlignment.middle,
+                    child: IconText("${_currentWeatherModel.currentTemperature}°",
+                      Icons.ac_unit,
+                      size: 36)
                   ),
                   Column(),
                   TableCell(
@@ -58,17 +59,19 @@ class CurrentWeatherWidget extends StatelessWidget {
                       children: [
                         const Align(
                           alignment: Alignment.centerRight,
-                          child: Text("temp", style: TextStyle(fontSize: 16)),
+                          child: Text("temp", style: TextStyle(fontSize: ConstantUI.textPercentAndTemperatureFontSize)),
                         ),
                         const SizedBox(height: 3),
                         Align(
                           alignment: Alignment.centerRight,
-                          child: Text("${_currentWeatherModel.maxTemperature}°/${_currentWeatherModel.minTemperature}°", style: const TextStyle(fontSize: 16)),
+                          child: Text("${_currentWeatherModel.maxTemperature}°/${_currentWeatherModel.minTemperature}°",
+                              style: const TextStyle(fontSize: ConstantUI.textPercentAndTemperatureFontSize)),
                         ),
                         const SizedBox(height: 3),
                         Align(
                           alignment: Alignment.centerRight,
-                          child: Text("Feels like ${_currentWeatherModel.fillLikeTemperature}°", style: const TextStyle(fontSize: 16)),
+                          child: Text("Feels like ${_currentWeatherModel.fillLikeTemperature}°",
+                              style: const TextStyle(fontSize: ConstantUI.textPercentAndTemperatureFontSize)),
                         ),
                       ],
                     ),
