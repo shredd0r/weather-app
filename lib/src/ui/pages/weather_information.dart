@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/src/static/constants.dart';
-import 'package:weather_app/src/ui/widgets/weather/current_weather_widget.dart';
-
 import 'package:weather_app/src/models/current_weather_model.dart';
 import 'package:weather_app/src/models/daily_weather_model.dart';
 import 'package:weather_app/src/models/hourly_weather_model.dart';
-import 'package:weather_app/src/ui/widgets/weather/daily_weather_widget.dart';
-import 'package:weather_app/src/ui/widgets/weather/hourly_weather_widget.dart';
+import 'package:weather_app/src/ui/widgets/weather/current/current_weather_widget.dart';
+import 'package:weather_app/src/ui/widgets/weather/daily/daily_weather_widget.dart';
+import 'package:weather_app/src/ui/widgets/weather/hourly/hourly_weather_widget.dart';
 
 class WeatherInfoWidget extends StatelessWidget {
   final bool _isVisible;

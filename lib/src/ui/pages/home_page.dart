@@ -66,7 +66,6 @@ class _HomePageState extends State<HomePage> {
 
     var listDaily = [
       DailyWeatherDetailModel(dailyModel, dailyModel),
-      // DailyWeatherDetailModel(dailyModel, dailyModel),
       DailyWeatherDetailModel(dailyModel, dailyModel),
       DailyWeatherDetailModel(dailyModel, dailyModel),
       DailyWeatherDetailModel(dailyModel, dailyModel),
