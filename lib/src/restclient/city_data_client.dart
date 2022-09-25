@@ -20,10 +20,11 @@ class GeoCodeExecutor {
       path: uri.path,
       queryParameters: QueryParametersHelper.map(requestDto.toJson()));
 
+    FlutterLogs.logInfo("GetCode", "getCityInfo", "uri: ${uri.toString()}");
     var response = await _client.get(uri);
 
     if (response.statusCode == 200) {
-      FlutterLogs.logInfo("GetGeo", "getCityInfo", "status: ${response.statusCode}, body: ${response.body}");
+      FlutterLogs.logInfo("GetCode", "getCityInfo", "status: ${response.statusCode}, body: ${response.body}");
 
       return GetCodeResponseDto.fromJson(jsonDecode(response.body));
     }

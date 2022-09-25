@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/src/dto/getcode/get_code_request.dart';
 import 'package:weather_app/src/dto/openweather/current/request/impl/current_weather_request_dto.dart';
 import 'package:weather_app/src/dto/openweather/current/request/impl/hourly_weather_request.dart';
 import 'package:weather_app/src/models/current_weather_model.dart';
 import 'package:weather_app/src/models/daily_weather_model.dart';
 import 'package:weather_app/src/models/hourly_weather_model.dart';
+import 'package:weather_app/src/restclient/city_data_client.dart';
 import 'package:weather_app/src/restclient/openweather_rest_client.dart';
 import 'package:weather_app/src/static/constants.dart';
 
@@ -20,6 +22,7 @@ class HomePage extends StatefulWidget{
 class _HomePageState extends State<HomePage> {
 
   final OpenWeatherExecutor openWeatherExecutor = OpenWeatherExecutor();
+  final GeoCodeExecutor getCodeExecutor = GeoCodeExecutor();
 
   late WeatherInfoWidget accuWeatherInfoWidget = WeatherInfoWidget(false, "AccuWeather", CurrentWeatherModel.emptyModel(), List<HourlyWeatherModel>.empty(), List<DailyWeatherDetailModel>.empty());
   late WeatherInfoWidget openWeatherInfoWidget = WeatherInfoWidget(false, "OpenWeather", CurrentWeatherModel.emptyModel(), List<HourlyWeatherModel>.empty(), List<DailyWeatherDetailModel>.empty());
@@ -28,6 +31,7 @@ class _HomePageState extends State<HomePage> {
   void sendRequest(BuildContext context) async {
     setState(
       ()=> {
+        getCodeExecutor.getCityInfo(GetCodeRequestDto(latitude:  48.5161, longitude: 32.2581, localityLanguage: "uk")),
         openWeatherExecutor.getCurrentWeatherInfo(
           CurrentWeatherOpenWeatherRequestDto( // TODO bruuh
             latitude: 48.5161,
@@ -111,7 +115,7 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
             leading: IconButton(
               onPressed: () {
-                sendRequest(context);
+                sendRequestMock(context);
               },
               iconSize: ConstantUI.weatherIconSize,
               icon: const Icon(Icons.abc_rounded),

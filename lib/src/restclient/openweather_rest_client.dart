@@ -56,7 +56,7 @@ class OpenWeatherExecutor {
     response = await _client.get(uri, headers: {'Content-Type': 'application/json'});
 
     if (response.statusCode == 200) {
-      FlutterLogs.logInfo("weather-app", "openweather-executor", "status code: ${response.statusCode.toString()}");
+      FlutterLogs.logInfo("weather-app", "openweather-executor", "status code: ${response.statusCode}");
       FlutterLogs.logInfo("weather-app", "openweather-executor", "body: ${response.body}");
       return HourlyWeatherOpenWeatherResponseDto.fromJson(jsonDecode(response.body));
     }
