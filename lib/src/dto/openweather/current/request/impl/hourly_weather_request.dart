@@ -8,7 +8,10 @@ part 'hourly_weather_request.g.dart';
 @JsonSerializable()
 class HourlyWeatherOpenWeatherRequestDto extends BaseWeatherRequestDto {
 
-  HourlyWeatherOpenWeatherRequestDto({latitude, longitude, appId}) : super(latitude, longitude, appId);
+  late String? units;
+  late String? lang;
+
+  HourlyWeatherOpenWeatherRequestDto({latitude, longitude, appId, this.units = "metric", this.lang}) : super(latitude, longitude, appId);
 
   factory HourlyWeatherOpenWeatherRequestDto.fromJson(Map<String, dynamic> json) => _$HourlyWeatherOpenWeatherRequestDtoFromJson(json);
   Map<String, dynamic> toJson() => _$HourlyWeatherOpenWeatherRequestDtoToJson(this);

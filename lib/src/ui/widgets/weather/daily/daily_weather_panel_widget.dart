@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/generated/l10n.dart';
 import 'package:weather_app/src/models/daily_weather_model.dart';
 import 'package:weather_app/src/services/mappers/mapper.dart';
 import 'package:weather_app/src/static/constants.dart';
@@ -71,7 +72,7 @@ class _DailyInfoWeatherWidget extends StatelessWidget {
   }
 
   Widget _firstCell(BuildContext context) {
-    String hi = "Wednesday";
+    String hi = S.of(context).wednesday;
 
     return TableCell(
         verticalAlignment: TableCellVerticalAlignment.middle,
@@ -182,35 +183,51 @@ class _DailyDetailInfoWeatherWidget extends StatelessWidget {
           ),
         ),
         BorderContainerWidget(
-            child: Table(
-              columnWidths: const <int, TableColumnWidth>{
-                0: IntrinsicColumnWidth(),
-                1: FlexColumnWidth(),
-                2: IntrinsicColumnWidth()
-              },
-              children: [
-                TableRow(
-                  children: [
-                    TableCell(
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Text("Влажность"),
+                        Text(model.humidity.toString())
+                      ]
+                    )
+                  ),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Text("UV индекс"),
+                        Text(model.indexUV.toString())
+                      ],
+                    )
+                  ),
+                ],
+              ),
+              const SeparatorWidget(),
+              Row(
+                children: [
+                  Expanded(
+                      child: Column(
+                          children: [
+                            Text("восход"),
+                            Text(model.sunriseTime.toString())
+                          ]
+                      )
+                  ),
+                  Expanded(
                       child: Column(
                         children: [
-                          Text("Влажность"),
-                          Text(model.humidity.toString())
+                          Text("закат"),
+                          Text(model.sunsetTime.toString())
                         ],
                       )
-                    ),
-                    TableCell(
-                      child: Column(
-                        children: [
-                          Text("UV индекс"),
-                          Text(model.indexUV.toString())
-                        ],
-                      ),
-                    )
-                  ]
-                )
-              ],
-            )
+                  ),
+                ],
+              ),
+            ],
+          )
         )
       ],
     );

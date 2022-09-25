@@ -9,13 +9,11 @@ class CurrentWeatherOpenWeatherRequestDto extends BaseWeatherRequestDto {
   late String? units;
   late String? lang;
 
-  double get getLatitude {return latitude;}
-
   CurrentWeatherOpenWeatherRequestDto({
     latitude,
     longitude,
     appId,
-    this.units,
+    this.units = "metric",
     this.lang
   }) : super(latitude, longitude, appId);
 

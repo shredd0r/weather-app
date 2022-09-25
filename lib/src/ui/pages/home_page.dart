@@ -32,7 +32,8 @@ class _HomePageState extends State<HomePage> {
           CurrentWeatherOpenWeatherRequestDto( // TODO bruuh
             latitude: 48.5161,
             longitude: 32.2581,
-            appId: "c654ce747dc9f2f105fe0eeb463136b9"))
+            appId: "c654ce747dc9f2f105fe0eeb463136b9",
+            lang: "ua"))
           .then((currentWeatherResponse) => Mapper.mapCurrentWeatherModel(currentWeatherResponse))
           .then((currentWeatherModel) =>
             openWeatherExecutor.getHourlyWeatherInfo(
@@ -110,7 +111,7 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
             leading: IconButton(
               onPressed: () {
-                sendRequestMock(context);
+                sendRequest(context);
               },
               iconSize: ConstantUI.weatherIconSize,
               icon: const Icon(Icons.abc_rounded),
