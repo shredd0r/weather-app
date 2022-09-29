@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter_logs/flutter_logs.dart';
 import 'package:http/http.dart';
-import 'package:weather_app/src/dto/getcode/get_code_request.dart';
-import 'package:weather_app/src/dto/getcode/get_code_response.dart';
+import 'package:weather_app/src/dto/getcode/request/get_code_request.dart';
+import 'package:weather_app/src/dto/getcode/response/get_code_response.dart';
 import 'package:weather_app/src/utils/QueryParametersHelper.dart';
 
 class GeoCodeExecutor {

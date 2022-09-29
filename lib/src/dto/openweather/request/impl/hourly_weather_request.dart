@@ -1,7 +1,5 @@
-
-
 import 'package:json_annotation/json_annotation.dart';
-import 'package:weather_app/src/dto/openweather/current/request/base_weather_request.dart';
+import 'package:weather_app/src/dto/openweather/request/base_weather_request.dart';
 
 part 'hourly_weather_request.g.dart';
 

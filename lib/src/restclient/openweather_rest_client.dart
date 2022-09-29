@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:flutter_logs/flutter_logs.dart';
 import 'package:http/http.dart';
 
-import 'package:weather_app/src/dto/openweather/current/request/impl/current_weather_request_dto.dart';
-import 'package:weather_app/src/dto/openweather/current/request/impl/hourly_weather_request.dart';
-import 'package:weather_app/src/dto/openweather/current/response/current_weather_response_dto.dart';
-import 'package:weather_app/src/dto/openweather/current/response/hourly_weather_response.dart';
+import 'package:weather_app/src/dto/openweather/request/impl/current_weather_request_dto.dart';
+import 'package:weather_app/src/dto/openweather/request/impl/hourly_weather_request.dart';
+import 'package:weather_app/src/dto/openweather/response/current_weather_response_dto.dart';
+import 'package:weather_app/src/dto/openweather/response/hourly_weather_response.dart';
 import 'package:weather_app/src/utils/QueryParametersHelper.dart';
 
 class OpenWeatherExecutor {

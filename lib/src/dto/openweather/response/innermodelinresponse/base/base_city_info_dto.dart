@@ -1,6 +1,5 @@
-
 import 'package:json_annotation/json_annotation.dart';
-import 'package:weather_app/src/dto/openweather/current/response/innermodelinresponse/coordination_dto.dart';
+import 'package:weather_app/src/dto/openweather/response/innermodelinresponse/coordination_dto.dart';
 
 class BaseCityInfoDto {
 

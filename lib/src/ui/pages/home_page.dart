@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/src/dto/getcode/get_code_request.dart';
-import 'package:weather_app/src/dto/openweather/current/request/impl/current_weather_request_dto.dart';
-import 'package:weather_app/src/dto/openweather/current/request/impl/hourly_weather_request.dart';
+import 'package:weather_app/src/dto/getcode/request/get_code_request.dart';
+import 'package:weather_app/src/dto/openweather/request/impl/current_weather_request_dto.dart';
+import 'package:weather_app/src/dto/openweather/request/impl/hourly_weather_request.dart';
+
 import 'package:weather_app/src/models/current_weather_model.dart';
 import 'package:weather_app/src/models/daily_weather_model.dart';
 import 'package:weather_app/src/models/hourly_weather_model.dart';

@@ -1,9 +1,6 @@
-
-
 import 'package:json_annotation/json_annotation.dart';
-import 'package:weather_app/src/dto/openweather/current/response/innermodelinresponse/city_info_detail_dto.dart';
+import 'package:weather_app/src/dto/openweather/response/innermodelinresponse/city_info_detail_dto.dart';
 
-import 'innermodelinresponse/base/base_city_info_dto.dart';
 import 'innermodelinresponse/hourly_info.dart';
 
 part 'hourly_weather_response.g.dart';

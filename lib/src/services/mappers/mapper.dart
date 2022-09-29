@@ -1,6 +1,7 @@
-import 'package:weather_app/src/dto/openweather/current/response/current_weather_response_dto.dart';
-import 'package:weather_app/src/dto/openweather/current/response/hourly_weather_response.dart';
-import 'package:weather_app/src/dto/openweather/current/response/innermodelinresponse/hourly_info.dart';
+
+import 'package:weather_app/src/dto/openweather/response/current_weather_response_dto.dart';
+import 'package:weather_app/src/dto/openweather/response/hourly_weather_response.dart';
+import 'package:weather_app/src/dto/openweather/response/innermodelinresponse/hourly_info.dart';
 import 'package:weather_app/src/models/current_weather_model.dart';
 import 'package:weather_app/src/models/daily_weather_model.dart';
 import 'package:weather_app/src/models/hourly_weather_model.dart';

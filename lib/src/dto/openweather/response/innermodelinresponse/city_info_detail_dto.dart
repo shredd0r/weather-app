@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:weather_app/src/dto/openweather/current/response/innermodelinresponse/base/base_city_info_dto.dart';
-import 'package:weather_app/src/dto/openweather/current/response/innermodelinresponse/coordination_dto.dart';
+import 'package:weather_app/src/dto/openweather/response/innermodelinresponse/base/base_city_info_dto.dart';
+import 'package:weather_app/src/dto/openweather/response/innermodelinresponse/coordination_dto.dart';
 
 part 'city_info_detail_dto.g.dart';
 
