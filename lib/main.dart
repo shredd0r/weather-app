@@ -3,7 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_logs/flutter_logs.dart';
 
 
-import 'generated/l10n.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'src/ui/pages/home_page.dart';
 
 void main() {
@@ -39,12 +39,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       localizationsDelegates: const [
-        S.delegate,
+        AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: S.delegate.supportedLocales,
+      supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(primarySwatch: Colors.blue),
       home: const HomePage(),
     );
