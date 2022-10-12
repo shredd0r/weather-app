@@ -17,19 +17,15 @@ class OpenWeatherExecutor {
   OpenWeatherExecutor();
 
   Future<CurrentWeatherOpenWeatherResponseDto> getCurrentWeatherInfo(CurrentWeatherOpenWeatherRequestDto requestDto) async {
-    FlutterLogs.logInfo("tag", "subTag", "start execute");
     var uri = Uri.parse(_path);
-    uri = Uri(
-        scheme: uri.scheme,
-        host: uri.host,
+
+    uri.replace(
         path: "${uri.path}weather",
         queryParameters: QueryParametersHelper.map(requestDto.toJson()));
     
     FlutterLogs.logInfo("weather-app", "openweather-executor", "uri: ${uri.toString()}");
 
-    Response response;
-
-    response = await _client.get(uri, headers: {'Content-Type': 'application/json'});
+    Response response = await _client.get(uri, headers: {'Content-Type': 'application/json'});
 
     if (response.statusCode == 200) {
       FlutterLogs.logInfo("weather-app", "openweather-executor", "status code: ${response.statusCode.toString()}");
@@ -41,19 +37,14 @@ class OpenWeatherExecutor {
   }
 
   Future<HourlyWeatherOpenWeatherResponseDto> getHourlyWeatherInfo(HourlyWeatherOpenWeatherRequestDto requestDto) async {
-    FlutterLogs.logInfo("tag", "subTag", "start execute");
     var uri = Uri.parse(_path);
-    uri = Uri(
-        scheme: uri.scheme,
-        host: uri.host,
+    uri.replace(
         path: "${uri.path}forecast",
         queryParameters: QueryParametersHelper.map(requestDto.toJson()));
 
     FlutterLogs.logInfo("weather-app", "openweather-executor", "uri: ${uri.toString()}");
 
-    Response response;
-
-    response = await _client.get(uri, headers: {'Content-Type': 'application/json'});
+    Response response = await _client.get(uri, headers: {'Content-Type': 'application/json'});
 
     if (response.statusCode == 200) {
       FlutterLogs.logInfo("weather-app", "openweather-executor", "status code: ${response.statusCode}");
