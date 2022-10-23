@@ -1,15 +1,19 @@
-import 'package:weather_app/src/dto/config/config_apikey_dto.dart';
+import 'package:weather_app/src/entity/provider_info.dart';
+import 'package:weather_app/src/entity/weather_settings.dart';
+import 'package:weather_app/src/static/weather_provider_enum.dart';
 
 abstract class ConfigurationRepository {
 
-  void load();
-
-  String getOpenWeatherApiKey();
-  String getAccuWeatherApiKey();
-  String getTheWeatherApiKey();
   String getNinjasApiKey();
+
+  int getFavoriteCitySettings();
+  void setFavoriteCitySettings(int id);
+
+  WeatherProvides getWeatherProviders(WeatherProvider id);
+
+  CitySettings getCitySetting(int id);
+  List<CitySettings> getAllCitySettings();
 
   void saveOpenWeatherApiKey(String newApiKey);
   void saveAccuWeatherApiKey(String newApiKey);
-  void saveTheWeatherApiKey(String newApiKey);
 }

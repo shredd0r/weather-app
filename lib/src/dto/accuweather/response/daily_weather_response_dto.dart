@@ -13,4 +13,7 @@ class DailyWeatherAccuWeatherResponseDto {
   DailyWeatherAccuWeatherResponseDto(
     this.headline,
     this.dailyForecasts);
+
+  factory DailyWeatherAccuWeatherResponseDto.fromJson(Map<String, dynamic> json) => _$DailyWeatherAccuWeatherResponseDtoFromJson(json);
+  Map<String, dynamic> toJson() => _$DailyWeatherAccuWeatherResponseDtoToJson(this);
 }
