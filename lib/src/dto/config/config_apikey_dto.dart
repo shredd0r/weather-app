@@ -11,16 +11,12 @@ class ApiKeyConfigurationDto {
   @JsonKey(name: "accuweather_key")
   late String accuWeatherApiKey = "";
 
-  @JsonKey(name: "theweather_key")
-  late String theWeatherApiKey = "";
-
   @JsonKey(name: "ninjas_key")
   late String ninjasApiKey;
 
   ApiKeyConfigurationDto(
       this.openWeatherApiKey,
-      this.accuWeatherApiKey,
-      this.theWeatherApiKey);
+      this.accuWeatherApiKey);
 
   Map<String, dynamic> toJson() => _$ApiKeyConfigurationDtoToJson(this);
   factory ApiKeyConfigurationDto.fromJson(Map<String, dynamic> json) => _$ApiKeyConfigurationDtoFromJson(json);
