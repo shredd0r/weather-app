@@ -6,11 +6,11 @@ import 'package:weather_app/src/dto/openweather/request/impl/hourly_weather_requ
 import 'package:weather_app/src/models/current_weather_model.dart';
 import 'package:weather_app/src/models/daily_weather_model.dart';
 import 'package:weather_app/src/models/hourly_weather_model.dart';
-import 'package:weather_app/src/restclient/city_data_client.dart';
-import 'package:weather_app/src/restclient/openweather_rest_client.dart';
+import 'package:weather_app/src/restclient/impl/city_data_client.dart';
+import 'package:weather_app/src/restclient/impl/openweather_rest_client.dart';
+import 'package:weather_app/src/services/mappers/mapper.dart';
 import 'package:weather_app/src/static/constants.dart';
 
-import '../../services/mappers/mapper.dart';
 import 'weather_information.dart';
 
 class HomePage extends StatefulWidget{
@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
             lang: "ua"))
           .then((currentWeatherResponse) => Mapper.mapCurrentWeatherModel(currentWeatherResponse))
           .then((currentWeatherModel) =>
-            openWeatherExecutor.getHourlyWeatherInfo(
+            openWeatherExecutor.getDailyHourlyWeatherInfo(
               HourlyWeatherOpenWeatherRequestDto(
                   latitude: 48.5161,
                   longitude: 32.2581,
