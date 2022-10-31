@@ -13,3 +13,8 @@ class ConstantUI {
 
   static const TextStyle onlyFontSizeStyle = TextStyle(fontSize: textDayOfWeekFontSize);
 }
+
+class Constant {
+  static const String dbName = "weather_api.db";
+  static const String defaultNinjaKey = "bdZb7BVicWcbh7PqajG9rEBRobaoOKYBNPa7CYzR";
+}

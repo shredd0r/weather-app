@@ -1,6 +1,10 @@
-class WeatherProvides {
-  late int id;
-  late String name;
-  late String apiKey;
-  late int countRequestPerDay;
+import 'api_keys.dart';
+
+class WeatherProviders {
+  final int id;
+  final String name;
+  final int countRequestPerDay;
+  final ApiKeys apiKey;
+
+  WeatherProviders(this.id, this.name, this.apiKey, this.countRequestPerDay);
 }

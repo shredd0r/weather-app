@@ -5,18 +5,10 @@ part 'config_apikey_dto.g.dart';
 @JsonSerializable()
 class ApiKeyConfigurationDto {
 
-  @JsonKey(name: "openweather_key")
-  late String openWeatherApiKey = "";
-
-  @JsonKey(name: "accuweather_key")
-  late String accuWeatherApiKey = "";
-
   @JsonKey(name: "ninjas_key")
   late String ninjasApiKey;
 
-  ApiKeyConfigurationDto(
-      this.openWeatherApiKey,
-      this.accuWeatherApiKey);
+  ApiKeyConfigurationDto(this.ninjasApiKey);
 
   Map<String, dynamic> toJson() => _$ApiKeyConfigurationDtoToJson(this);
   factory ApiKeyConfigurationDto.fromJson(Map<String, dynamic> json) => _$ApiKeyConfigurationDtoFromJson(json);

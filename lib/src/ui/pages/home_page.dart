@@ -9,19 +9,16 @@ import 'package:weather_app/src/models/hourly_weather_model.dart';
 import 'package:weather_app/src/restclient/impl/city_data_client.dart';
 import 'package:weather_app/src/restclient/impl/openweather_rest_client.dart';
 import 'package:weather_app/src/services/mappers/mapper.dart';
+import 'package:weather_app/src/services/repositories/base/configuration_repository.dart';
+import 'package:weather_app/src/services/repositories/impl/configuration/configuration_sqllite_repository.dart';
 import 'package:weather_app/src/static/constants.dart';
 
 import 'weather_information.dart';
 
 class HomePage extends StatefulWidget{
-  const HomePage({Key? key}) : super(key: key);
+  HomePage(this.configurationRepository, {Key? key}) : super(key: key);
 
-  @override
-  State<StatefulWidget> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-
+  final ConfigurationRepository configurationRepository;
   final OpenWeatherExecutor openWeatherExecutor = OpenWeatherExecutor();
   final GeoCodeExecutor getCodeExecutor = GeoCodeExecutor();
 
@@ -29,11 +26,17 @@ class _HomePageState extends State<HomePage> {
   late WeatherInfoWidget openWeatherInfoWidget = WeatherInfoWidget(false, "OpenWeather", CurrentWeatherModel.emptyModel(), List<HourlyWeatherModel>.empty(), List<DailyWeatherDetailModel>.empty());
   late WeatherInfoWidget theWeatherWeatherInfoWidget = WeatherInfoWidget(false, "TheWeather", CurrentWeatherModel.emptyModel(), List<HourlyWeatherModel>.empty(), List<DailyWeatherDetailModel>.empty());
 
+  @override
+  State<StatefulWidget> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+
   void sendRequest(BuildContext context) async {
     setState(
       ()=> {
-        getCodeExecutor.getCityInfo(GetCodeRequestDto(latitude:  48.5161, longitude: 32.2581, localityLanguage: "uk")),
-        openWeatherExecutor.getCurrentWeatherInfo(
+        widget.getCodeExecutor.getCityInfo(GetCodeRequestDto(latitude:  48.5161, longitude: 32.2581, localityLanguage: "uk")),
+        widget.openWeatherExecutor.getCurrentWeatherInfo(
           CurrentWeatherOpenWeatherRequestDto( // TODO bruuh
             latitude: 48.5161,
             longitude: 32.2581,
@@ -41,13 +44,13 @@ class _HomePageState extends State<HomePage> {
             lang: "ua"))
           .then((currentWeatherResponse) => Mapper.mapCurrentWeatherModel(currentWeatherResponse))
           .then((currentWeatherModel) =>
-            openWeatherExecutor.getDailyHourlyWeatherInfo(
+            widget.openWeatherExecutor.getDailyHourlyWeatherInfo(
               HourlyWeatherOpenWeatherRequestDto(
                   latitude: 48.5161,
                   longitude: 32.2581,
                   appId: "c654ce747dc9f2f105fe0eeb463136b9"))
               .then((hourlyWeatherResponse)=> Mapper.mapHourlyWeatherModel(hourlyWeatherResponse))
-              .then((listHourlyWeatherModel)=> openWeatherInfoWidget = WeatherInfoWidget(
+              .then((listHourlyWeatherModel)=> widget.openWeatherInfoWidget = WeatherInfoWidget(
                 true,
                 "OpenWeather",
                 currentWeatherModel,
@@ -87,7 +90,7 @@ class _HomePageState extends State<HomePage> {
 
     setState(
         ()=> {
-          openWeatherInfoWidget = WeatherInfoWidget(
+          widget.openWeatherInfoWidget = WeatherInfoWidget(
           true,
           "OpenWeather",
           CurrentWeatherModel(
@@ -103,7 +106,7 @@ class _HomePageState extends State<HomePage> {
             "non",
             DateTime.now()),
           listHourly,
-          listDaily)
+          listDaily),
         }
     );
   }
@@ -127,9 +130,9 @@ class _HomePageState extends State<HomePage> {
         body:
           PageView(
             children: [
-              openWeatherInfoWidget,
-              accuWeatherInfoWidget,
-              theWeatherWeatherInfoWidget,
+              widget.openWeatherInfoWidget,
+              widget.accuWeatherInfoWidget,
+              widget.theWeatherWeatherInfoWidget,
             ],
           ),
     );

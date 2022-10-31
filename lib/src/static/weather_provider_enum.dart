@@ -1,4 +1,4 @@
-enum WeatherProvider {
+enum WeatherProviders {
   accuWeather,
   openWeather
 }

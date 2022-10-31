@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/generated/l10n.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:weather_app/src/models/daily_weather_model.dart';
 import 'package:weather_app/src/services/mappers/mapper.dart';
 import 'package:weather_app/src/static/constants.dart';
@@ -72,7 +72,7 @@ class _DailyInfoWeatherWidget extends StatelessWidget {
   }
 
   Widget _firstCell(BuildContext context) {
-    String hi = S.of(context).wednesday;
+    String hi = AppLocalizations.of(context)!.wednesday;
 
     return TableCell(
         verticalAlignment: TableCellVerticalAlignment.middle,

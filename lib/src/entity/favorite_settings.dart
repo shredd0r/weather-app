@@ -1,5 +1,5 @@
 class FavoriteCitySettings {
-  late int id;
+  final int id;
 
   FavoriteCitySettings(this.id);
 }

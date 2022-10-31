@@ -4,6 +4,8 @@ import 'package:flutter_logs/flutter_logs.dart';
 
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:weather_app/src/services/repositories/impl/configuration/configuration_sqllite_repository.dart';
+import 'package:weather_app/src/static/weather_provider_enum.dart';
 import 'src/ui/pages/home_page.dart';
 
 void main() {
@@ -34,9 +36,10 @@ void setupLogging() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    var repo = ConfigurationSqlLiteRepository();
+
     return MaterialApp(
       localizationsDelegates: const [
         AppLocalizations.delegate,
@@ -46,7 +49,7 @@ class MyApp extends StatelessWidget {
       ],
       supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const HomePage(),
+      home: HomePage(repo),
     );
   }
 }
