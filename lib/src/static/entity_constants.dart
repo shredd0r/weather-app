@@ -18,3 +18,10 @@ class FavoriteCitySettingStatic {
   static const String entityName = "favoritecity";
   static const String id = "id";
 }
+
+class ApiKeysStatics {
+  static const String entityName = "apikeys";
+  static const String id = "id";
+  static const String apiKey = "apikey";
+  static const String serviceName = "serviceName";
+}

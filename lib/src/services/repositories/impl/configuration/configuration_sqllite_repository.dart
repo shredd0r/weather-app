@@ -1,14 +1,14 @@
 import 'dart:io';
 
+import 'package:sqflite/sqflite.dart';
 import 'package:flutter_logs/flutter_logs.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:weather_app/src/entity/api_keys.dart';
-import 'package:weather_app/src/entity/weather_settings.dart';
-import 'package:weather_app/src/services/repositories/base/configuration_repository.dart';
-import 'package:weather_app/src/static/apikey_enum.dart';
 import 'package:weather_app/src/static/constants.dart';
+import 'package:weather_app/src/static/apikey_enum.dart';
+import 'package:weather_app/src/entity/weather_settings.dart';
 import 'package:weather_app/src/static/entity_constants.dart';
+import 'package:weather_app/src/services/repositories/base/configuration_repository.dart';
 
 class ConfigurationSqlLiteRepository extends ConfigurationRepository {
 
@@ -23,26 +23,8 @@ class ConfigurationSqlLiteRepository extends ConfigurationRepository {
     dataBase = await openDatabase(dbPath,
       version: 1,
       onCreate: (Database dataBase, int version) {
-        dataBase.execute(
-          '''create table ${ProviderInfosStatic.entityName}(
-            ${ProviderInfosStatic.id} INTEGER PRIMARY KEY, 
-            ${ProviderInfosStatic.name} TEXT,
-            ${ProviderInfosStatic.apiKey} TEXT,
-            ${ProviderInfosStatic.countCallApiPerDay} INTEGER)
-          ''');
-        dataBase.execute(
-          '''create table ${FavoriteCitySettingStatic.entityName}(
-            ${FavoriteCitySettingStatic.id} INTEGER PRIMARY KEY)
-          ''');
-        dataBase.execute(
-          '''create table ${CitySettingsStatic.entityName}(
-            ${CitySettingsStatic.id} INTEGER PRIMARY KEY,
-            ${CitySettingsStatic.city} TEXT,
-            ${CitySettingsStatic.cityId} TEXT,
-            ${CitySettingsStatic.latitude} DOUBLE,
-            ${CitySettingsStatic.longitude} DOUBLE)
-          '''
-        );
+        createTables(dataBase, version);
+        insertDataInEntity(dataBase, version);
     });
 
     FlutterLogs.logInfo("ConfigurationSqlLiteRepository", "load", "db path: $dbPath, db version: ${await dataBase.getVersion()}");
@@ -95,5 +77,46 @@ class ConfigurationSqlLiteRepository extends ConfigurationRepository {
   @override
   void updateCityIdInCitySettings(int id, int newCityId) {
     // TODO: implement updateCityIdInCitySettings
+  }
+
+  void createTables(Database database, int version) {
+    if (version == 1) {
+      database.execute(
+          '''create table ${ApiKeysStatics.entityName}(
+        ${ApiKeysStatics.id} INTEGER PRIMARY KEY,
+        ${ApiKeysStatics.apiKey} TEXT,
+        ${ApiKeysStatics.serviceName} TEXT)'''
+      );
+      database.execute(
+          '''create table ${ProviderInfosStatic.entityName}(
+        ${ProviderInfosStatic.id} INTEGER PRIMARY KEY, 
+        ${ProviderInfosStatic.name} TEXT,
+        ${ProviderInfosStatic.apiKey} INTEGER,
+        ${ProviderInfosStatic.countCallApiPerDay} INTEGER)
+      ''');
+      database.execute(
+          '''create table ${FavoriteCitySettingStatic.entityName}(
+        ${FavoriteCitySettingStatic.id} INTEGER PRIMARY KEY)
+      ''');
+      database.execute(
+          '''create table ${CitySettingsStatic.entityName}(
+        ${CitySettingsStatic.id} INTEGER PRIMARY KEY,
+        ${CitySettingsStatic.city} TEXT,
+        ${CitySettingsStatic.cityId} TEXT,
+        ${CitySettingsStatic.latitude} DOUBLE,
+        ${CitySettingsStatic.longitude} DOUBLE)
+      '''
+      );
+    }
+  }
+
+  void insertDataInEntity(Database database, int version) {
+    if (version == 1) {
+      dataBase.insert(ApiKeysStatics.entityName, {
+        ApiKeysStatics.id : 1,
+        ApiKeysStatics.apiKey : Constant.defaultNinjaKey,
+        ApiKeysStatics.serviceName : "NinjasService"
+      });
+    }
   }
 }
