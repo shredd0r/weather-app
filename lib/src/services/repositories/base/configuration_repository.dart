@@ -1,4 +1,5 @@
 import 'package:weather_app/src/entity/api_keys.dart';
+import 'package:weather_app/src/entity/favorite_settings.dart';
 import 'package:weather_app/src/entity/weather_settings.dart';
 import 'package:weather_app/src/static/apikey_enum.dart';
 
@@ -10,7 +11,7 @@ abstract class ConfigurationRepository {
 
   void load();
 
-  Future<int> getFavoriteCitySettings();
+  Future<FavoriteCitySettings> getFavoriteCitySettings();
   void setFavoriteCitySettings(int id);
 
   Future<ApiKeys> getApiKeyBy(ApiKey apiKey);

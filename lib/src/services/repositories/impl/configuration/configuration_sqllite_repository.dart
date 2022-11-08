@@ -4,6 +4,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:flutter_logs/flutter_logs.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:weather_app/src/entity/api_keys.dart';
+import 'package:weather_app/src/entity/favorite_settings.dart';
 import 'package:weather_app/src/static/constants.dart';
 import 'package:weather_app/src/static/apikey_enum.dart';
 import 'package:weather_app/src/entity/weather_settings.dart';
@@ -23,39 +24,41 @@ class ConfigurationSqlLiteRepository extends ConfigurationRepository {
     dataBase = await openDatabase(dbPath,
       version: 1,
       onCreate: (Database dataBase, int version) {
-        createTables(dataBase, version);
-        insertDataInEntity(dataBase, version);
+        _createTables(dataBase, version);
+        _insertDataInEntity(dataBase, version);
     });
 
     FlutterLogs.logInfo("ConfigurationSqlLiteRepository", "load", "db path: $dbPath, db version: ${await dataBase.getVersion()}");
   }
 
   @override
-  Future<List<CitySettings>> getAllCitySettings() {
-    var response = dataBase.query(CitySettingsStatic.entityName);
-    FlutterLogs.logInfo("ConfigurationSqlLiteRepository", "getAllCitySettings", "response: $response");
+  Future<List<CitySettings>> getAllCitySettings() async {
+    var response = await dataBase.query(CitySettingsStatic.entityName);
 
-    throw UnimplementedError();
+    FlutterLogs.logInfo("ConfigurationSqlLiteRepository", "getAllCitySettings", "response: $response");
+    return response.map((citySettingsJson) => CitySettings.fromJson(citySettingsJson)).toList();
   }
 
   @override
-  Future<CitySettings> getCitySetting(int id) {
-    var response = dataBase.query(CitySettingsStatic.entityName,
-        where: "${CitySettingsStatic.id} = $id}");
+  Future<CitySettings> getCitySetting(int id) async {
+    var response = await dataBase.query(
+      CitySettingsStatic.entityName,
+      where: "${CitySettingsStatic.id} = $id}");
 
     FlutterLogs.logInfo("ConfigurationSqlLiteRepository", "getCitySetting", "response: $response");
 
-    throw UnimplementedError();
+
+    return CitySettings.fromJson(_getFirstElementFromResponse(response));
   }
 
   @override
-  Future<int> getFavoriteCitySettings() {
-    var response = dataBase.query(FavoriteCitySettingStatic.entityName, limit: 1);
+  Future<FavoriteCitySettings> getFavoriteCitySettings() async {
+    var response = await dataBase.query(FavoriteCitySettingStatic.entityName, limit: 1);
 
     FlutterLogs.logInfo("ConfigurationSqlLiteRepository", "getFavoriteCitySettings", "response: $response");
 
 
-    throw UnimplementedError();
+    return FavoriteCitySettings.fromJson(_getFirstElementFromResponse(response));
   }
 
   @override
@@ -65,13 +68,12 @@ class ConfigurationSqlLiteRepository extends ConfigurationRepository {
 
   @override
   Future<ApiKeys> getApiKeyBy(ApiKey apiKey) {
-    // TODO: implement getApiKeyBy
     throw UnimplementedError();
   }
 
   @override
   void saveApiKey(ApiKeys newApiKeys) {
-    // TODO: implement saveApiKey
+    dataBase.insert(ApiKeysStatics.entityName, newApiKeys.toJson());
   }
 
   @override
@@ -79,7 +81,7 @@ class ConfigurationSqlLiteRepository extends ConfigurationRepository {
     // TODO: implement updateCityIdInCitySettings
   }
 
-  void createTables(Database database, int version) {
+  void _createTables(Database database, int version) {
     if (version == 1) {
       database.execute(
           '''create table ${ApiKeysStatics.entityName}(
@@ -96,7 +98,8 @@ class ConfigurationSqlLiteRepository extends ConfigurationRepository {
       ''');
       database.execute(
           '''create table ${FavoriteCitySettingStatic.entityName}(
-        ${FavoriteCitySettingStatic.id} INTEGER PRIMARY KEY)
+        ${FavoriteCitySettingStatic.id} INTEGER PRIMARY KEY,
+        ${FavoriteCitySettingStatic.citySettings} INTEGER)
       ''');
       database.execute(
           '''create table ${CitySettingsStatic.entityName}(
@@ -110,7 +113,7 @@ class ConfigurationSqlLiteRepository extends ConfigurationRepository {
     }
   }
 
-  void insertDataInEntity(Database database, int version) {
+  void _insertDataInEntity(Database database, int version) {
     if (version == 1) {
       dataBase.insert(ApiKeysStatics.entityName, {
         ApiKeysStatics.id : 1,
@@ -118,5 +121,11 @@ class ConfigurationSqlLiteRepository extends ConfigurationRepository {
         ApiKeysStatics.serviceName : "NinjasService"
       });
     }
+  }
+
+  Map<String, dynamic> _getFirstElementFromResponse(List<Map<String, dynamic>> response) {
+    return response.isNotEmpty ?
+        response.first :
+        Map<String, dynamic>();
   }
 }

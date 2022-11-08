@@ -17,6 +17,7 @@ class CitySettingsStatic{
 class FavoriteCitySettingStatic {
   static const String entityName = "favoritecity";
   static const String id = "id";
+  static const String citySettings = "citysettingsid";
 }
 
 class ApiKeysStatics {
